@@ -6,7 +6,6 @@
 import numpy as np
 from numpy.random import randn
 
-
 #Problem 1 - Oishani
 #hello
 def compute_slope_estimator(x_vals,y_vals):
