@@ -8,6 +8,7 @@ from numpy.random import randn
 
 
 #Problem 1 - Oishani
+#hello
 def compute_slope_estimator(x_vals,y_vals):
 	n = len(x_vals)
 	for i in range(0, n):
