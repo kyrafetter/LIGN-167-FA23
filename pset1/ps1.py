@@ -56,9 +56,9 @@ def gradient_descent_step(x_vals,y_vals,a,b,k=0.01):
 def gradient_descent(x_vals,y_vals,a_0=0,b_0=0,k=1000):
 
 
-# Problem 8  Lina
+# Problem 8  Lina - COME BACK AND TEST THIS 
 def einsum_1(A, B):
-	return np.einsum...
+	return np.einsum('ij, ij->ij', A, B)
 
 # Problem 9 - Oishani
 def einsum_2(A, B):
@@ -70,4 +70,4 @@ def einsum_3(A, B):
 
 # Problem 11 - Lina 
 def einsum_4(A, B):
-	return np.einsum...
+	return np.einsum('ijk, ikq -> ijq', A, B)

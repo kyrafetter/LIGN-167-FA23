@@ -14,13 +14,10 @@
 # 4
 
 # 5
-
-import numpy as np
-
 def f(xi, yi, a, b):
     return (yi - a * xi - b) ** 2
 
-def dL_db(x_vals, y_vals, a, b):
+def dL_db_3_5(x_vals, y_vals, a, b):
     n = len(x_vals)
     partial_sum = 0
     
@@ -52,6 +49,27 @@ used. Also, although not wrong, the code it wrote is longer than necessary.
 # 7 
 
 # 8 
+import numpy as np
+
+def multiply_matrices(A, B):
+    # Check if the input arrays have the same shape
+    if A.shape != B.shape:
+        raise ValueError("Input arrays A and B must have the same shape")
+
+    # Use np.einsum to multiply the matrices element-wise
+    C = np.einsum('ij,ij->ij', A, B)
+
+    return C
+
+# Example usage:
+A = np.array([[1, 2, 3], [4, 5, 6]])
+B = np.array([[1, 0, 1], [0, 1, 0]])
+
+C = multiply_matrices(A, B)
+print(C)
+
+# https://chat.openai.com/share/3f04c113-22e6-4903-9646-6f0a9f119453
+
 
 # 9 
 
@@ -105,6 +123,29 @@ def dL_db_gpt_4(x_vals, y_vals, a, b):
 # 7
 
 # 8 
+def elementwise_product_4(A, B):
+    """
+    Compute the element-wise product of two matrices A and B using Einstein summation.
+    
+    Parameters:
+    A, B: 2D NumPy arrays of the same size (n x m).
+    
+    Returns:
+    C: 2D NumPy array (n x m) where C[i,j] = A[i,j] * B[i,j].
+    """
+    # Check if A and B have the same shape
+    if A.shape != B.shape:
+        raise ValueError("Input matrices A and B must have the same shape")
+    
+    # Use np.einsum to compute the element-wise product
+    # 'ij,ij->ij' indicates that we take element i,j from A and multiply it with element i,j from B, 
+    # and place the result in position i,j in the output array
+    C = np.einsum('ij,ij->ij', A, B)
+    
+    return C
+
+# Link to chat conversation: https://chat.openai.com/share/f1892baa-dbe7-439b-95e0-3739d8c7ba32
+
 
 # 9 
 
