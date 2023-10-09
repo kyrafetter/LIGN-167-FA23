@@ -60,7 +60,8 @@ def einsum_2(A, B):
 
 # Problem 10 - Kyra
 def einsum_3(A, B):
-	return np.einsum...
+	return np.einsum('ijk,ki->ij', A, B)
+	#return np.einsum('ijk,ik->ij', A, B)
 
 # Problem 11 - Lina 
 def einsum_4(A, B):

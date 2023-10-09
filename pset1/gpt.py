@@ -78,6 +78,41 @@ def gradient_descent(x_vals, y_vals, a_0=0.0, b_0=0.0, k=100, learning_rate=0.01
     
     return a_current, b_current
 
+#10
+"""
+Link: https://chat.openai.com/share/3a924609-6bf6-4201-a3d9-1be5d576d2ce
+
+"""
+import numpy as np
+
+def batch_matrix_vector_multiplication(A, B):
+    # Ensure that the dimensions of A and B are compatible
+    assert A.shape[0] == B.shape[0]  # Check if b dimensions match
+    assert A.shape[2] == B.shape[1]  # Check if m dimensions match
+
+    # Perform batch matrix-vector multiplication using np.einsum
+    C = np.einsum('ijk,ik->ij', A, B)
+
+    return C
+
+# Example usage:
+# Create a sample 3-D array A and a 2-D array B
+A = np.array([[[1, 2, 3, 4],
+               [5, 6, 7, 8],
+               [9, 10, 11, 12]],
+              [[13, 14, 15, 16],
+               [17, 18, 19, 20],
+               [21, 22, 23, 24]]])
+
+B = np.array([[1, 2, 3, 4],
+              [5, 6, 7, 8]])
+
+# Call the function to perform batch matrix-vector multiplication
+C = batch_matrix_vector_multiplication(A, B)
+
+# Output the result
+print(C)
+
 
 
 # GPT 4
@@ -122,7 +157,6 @@ GPT-4 does not appear to make any mistakes; it provides clean, concise, and
 well-commented code which makes correct use of the gradient_descent_step
 function implemented in the previous problem. 
 """
-
 def gradient_descent(x_vals, y_vals, a_0=0, b_0=0, k=1000):
     """
     Performs k steps of the gradient descent optimization algorithm.
@@ -141,3 +175,33 @@ def gradient_descent(x_vals, y_vals, a_0=0, b_0=0, k=1000):
     for _ in range(k):
         a, b = gradient_descent_step(x_vals, y_vals, a, b)
     return a, b
+
+# 10 
+"""
+Link: https://chat.openai.com/share/5490482e-392a-4245-8ac4-4e52dee1d1b4
+
+"""
+import numpy as np
+
+def batch_matvec_mult(A, B):
+    """
+    Perform batch matrix-vector multiplication.
+    
+    Parameters:
+        A (np.array): A 3-D NumPy array with shape (b, n, m).
+        B (np.array): A 2-D NumPy array with shape (b, m).
+        
+    Returns:
+        C (np.array): A 2-D NumPy array with shape (b, n).
+    """
+    # Ensure the inputs are numpy arrays
+    A = np.array(A)
+    B = np.array(B)
+
+    # Check the shapes of A and B for compatibility
+    assert A.shape[2] == B.shape[1], "Incompatible shapes for matrix-vector multiplication."
+    
+    # Use Einstein summation convention to perform the batch matrix-vector multiplication
+    C = np.einsum('ijk,ik->ij', A, B)
+    
+    return C
