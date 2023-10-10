@@ -11,19 +11,37 @@ from numpy.random import randn
 #hello
 def compute_slope_estimator(x_vals,y_vals):
 	n = len(x_vals)
-	for i in range(0, n):
-		x_bar = np.average(np.arange(, x_vals[n]))
-		
+	x_bar = (np.sum(x_vals))/n
+	y_bar = (np.sum(y_vals))/n
+	numerator_sum = 0
+	for i in range(0,n):
+		prod = x_vals[i]*y_vals[i]
+		numerator_sum += prod
+	numerator = (numerator_sum - (n*x_bar*y_bar))
+	denom_sum = 0
+	for i in range(0,n):
+		prod = x_vals[i]*x_vals[i]
+		denom_sum += prod
+	denominator = (denom_sum - (n*x_bar*x_bar)
+	a = numerator/denominator
+	return a		
 	
 
 #Problem 2 - Oishani
 def compute_intercept_estimator(x_vals,y_vals):
-	y_mean = np.mean()
+	x_bar = (np.sum(x_vals))/n
+	y_bar = (np.sum(y_vals))/n
+	a = compute_slope_estimator(x_vals,y_vals)
+	b = y_bar - (a*x_bar)
+	return b
+
 
 #Problem 3 - Oishani
 def train_model(x_vals,y_vals):
-	#your code here
+	a = compute_slope_estimator(x_vals,y_vals)
+	b = compute_intercept_estimator(x_vals,y_vals)
 	return (a,b)
+
 
 #Problem 4 - Kyra
 def dL_da(x_vals,y_vals,a,b):
@@ -33,9 +51,6 @@ def dL_da(x_vals,y_vals,a,b):
 	xy = x_vals * y_vals 
 	bx = b * y_vals
 	total 
-		
-
-
 	
 
 #Problem 5 - Lina -- COME BACK AND TEST THIS 
