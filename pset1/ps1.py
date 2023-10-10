@@ -74,6 +74,7 @@ def einsum_1(A, B):
 	"""
 	return np.einsum('ij, ij->ij', A, B)
 
+
 # Problem 9 - Oishani
 def einsum_2(A, B):
 	return np.einsum...
