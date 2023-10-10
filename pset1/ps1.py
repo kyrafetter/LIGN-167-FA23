@@ -26,15 +26,9 @@ def train_model(x_vals,y_vals):
 
 #Problem 4 - Kyra
 def dL_da(x_vals,y_vals,a,b):
-	n = x_vals.size
-	x_sqrd = np.power(x_vals, 2)
-	ax_sqrd = a * x_sqrd
-	xy = x_vals * y_vals 
-	bx = b * y_vals
-	total 
-	## hello, this is a test comment
-		
-
+  
+	dl_da = 2 * np.sum((a * np.power(x_vals, 2)) - (x_vals * y_vals) + (b * x_vals))
+	return (1 / float(x_vals.size)) * dl_da
 #Problem 5 - Lina - doctest that chat gpt was wrong. 
 
 def dL_db(x_vals,y_vals,a,b):
@@ -61,7 +55,10 @@ def gradient_descent_step(x_vals,y_vals,a,b,k=0.01):
 
 #Problem 7  - Kyra
 def gradient_descent(x_vals,y_vals,a_0=0,b_0=0,k=1000):
-	
+	a_b = (a_0, b_0)
+	for i in range(k):
+		a_b = gradient_descent_step(x_vals, y_vals, a_b[0], a_b[1])
+	return a_b 
 
 
 # Problem 8  Lina -- fix doctest, right now it's not working 
@@ -80,7 +77,7 @@ def einsum_2(A, B):
 
 # Problem 10 - Kyra
 def einsum_3(A, B):
-	return np.einsum...
+	return np.einsum('ijk,ik->ij', A, B)
 
 # Problem 11 - Lina 
 def einsum_4(A, B):
