@@ -51,7 +51,7 @@ used. Also, although not wrong, the code it wrote is longer than necessary.
 # 8 
 import numpy as np
 
-def multiply_matrices(A, B):
+def multiply_matrices_3_5(A, B):
     # Check if the input arrays have the same shape
     if A.shape != B.shape:
         raise ValueError("Input arrays A and B must have the same shape")
@@ -76,6 +76,35 @@ print(C)
 # 10
 
 # 11
+def batch_matmul_3_5(A, B):
+    """
+    Perform batch matrix multiplication between A and B using np.einsum.
+
+    Args:
+    A: 3-D NumPy array with shape (b, n, m)
+    B: 3-D NumPy array with shape (b, m, p)
+
+    Returns:
+    C: 3-D NumPy array with shape (b, n, p)
+    """
+    if A.shape[2] != B.shape[1]:
+        raise ValueError("Matrix dimensions do not align for multiplication")
+
+    # Use np.einsum to perform batch matrix multiplication
+    C = np.einsum('bik, bkq -> biq', A, B)
+
+    return C
+
+# Example usage:
+# Create sample 3-D arrays A and B
+A = np.random.rand(2, 4, 3)  # A has shape (2, 4, 3)
+B = np.random.rand(2, 3, 5)  # B has shape (2, 3, 5)
+
+# Perform batch matrix multiplication
+C = batch_matmul(A, B)  # C will have shape (2, 4, 5)
+
+# link to conversation: https://chat.openai.com/share/ab51ccd4-35de-431b-9ff4-ae6b51de08dc
+
 
 # GPT 4
 
@@ -152,3 +181,47 @@ def elementwise_product_4(A, B):
 # 10 
 
 # 11
+
+import numpy as np
+
+def batch_matmul_einsum_4(A, B):
+    """
+    Perform batch matrix-matrix multiplication of A and B using np.einsum.
+
+    Parameters:
+    - A (numpy.ndarray): a 3D numpy array with shape (b, n, m)
+    - B (numpy.ndarray): a 3D numpy array with shape (b, m, p)
+
+    Returns:
+    - C (numpy.ndarray): the resulting 3D numpy array with shape (b, n, p)
+    """
+    # Check if A and B are numpy arrays
+    if not (isinstance(A, np.ndarray) and isinstance(B, np.ndarray)):
+        raise ValueError("Input should be numpy ndarrays")
+
+    # Check the shapes of A and B
+    b, n, m = A.shape
+    b_, m_, p = B.shape
+    if b != b_ or m != m_:
+        raise ValueError("Mismatched shapes: A is {}, B is {}".format(A.shape, B.shape))
+    
+    # Perform batch matrix multiplication using np.einsum
+    C = np.einsum('ijk,ikq->ijq', A, B)
+    return C
+
+# Example usage:
+# Create random arrays A and B with shapes (b, n, m) and (b, m, p) respectively.
+b, n, m, p = 10, 4, 5, 3
+A = np.random.rand(b, n, m)
+B = np.random.rand(b, m, p)
+
+# Get the batch matrix multiplication result
+C = batch_matmul_einsum(A, B)
+
+# Link to chat conversation: https://chat.openai.com/share/3c234bd6-2b16-42a0-b30a-0236a80984ef
+
+
+
+
+
+
