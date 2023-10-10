@@ -35,30 +35,44 @@ def dL_da(x_vals,y_vals,a,b):
 	## hello, this is a test comment
 		
 
+#Problem 5 - Lina - doctest that chat gpt was wrong. 
 
-	
-
-#Problem 5 - Lina -- COME BACK AND TEST THIS 
 def dL_db(x_vals,y_vals,a,b):
+	"""
+	>>> dL_db(np.array([1, 2, 3, 4]), np.array([2, 4, 5, 4]), 1, 2)
+	1.5
+	# >>> dL_db(np.array([2, 4]), np.array([4, 7]), 0.5, 3)
+	# -3.5
+	# >>> dL_db(np.array([1, 3]), np.array([4, 6]), 1, 1)
+	# -3.0
+	"""
 	ax = a*x_vals
-	total_sum = 0 
-	temp = ax - y_vals
-	temp = temp + b
-	total_sum += np.sum(temp)
+	temp = (ax - y_vals) + b
+	total_sum = np.sum(temp)
 	final_partial_b = 2 * total_sum
-	final_partial_b = final_partial_b/x_vals.size
+	final_partial_b = float(final_partial_b)/float(len(x_vals))
 	return final_partial_b 
+
+
 
 #Problem 6 - Oishani
 def gradient_descent_step(x_vals,y_vals,a,b,k=0.01):
+	
 
 #Problem 7  - Kyra
 def gradient_descent(x_vals,y_vals,a_0=0,b_0=0,k=1000):
+	
 
 
-# Problem 8  Lina
+# Problem 8  Lina -- fix doctest, right now it's not working 
 def einsum_1(A, B):
-	return np.einsum...
+	"""
+	>>> A = np.array([[1, 2, 3], [4, 5, 6]])
+	>>> B = np.array([[1, 0, 1], [0, 1, 0]])
+	>>> einsum_1(A, B)
+	array([[1, 0, 3], [0, 5, 0]])
+	"""
+	return np.einsum('ij, ij->ij', A, B)
 
 # Problem 9 - Oishani
 def einsum_2(A, B):
@@ -70,4 +84,4 @@ def einsum_3(A, B):
 
 # Problem 11 - Lina 
 def einsum_4(A, B):
-	return np.einsum...
+	return np.einsum('ijk, ikq -> ijq', A, B)
