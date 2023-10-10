@@ -27,7 +27,7 @@ def train_model(x_vals,y_vals):
 #Problem 4 - Kyra
 def dL_da(x_vals,y_vals,a,b):
 	dl_da = 2 * np.sum((a * np.power(x_vals, 2)) - (x_vals * y_vals) + (b * x_vals))
-	return (1 / x_vals.size) * dl_da
+	return (1 / float(x_vals.size)) * dl_da
 
 #Problem 5 - Lina -- COME BACK AND TEST THIS 
 def dL_db(x_vals,y_vals,a,b):
@@ -60,8 +60,7 @@ def einsum_2(A, B):
 
 # Problem 10 - Kyra
 def einsum_3(A, B):
-	return np.einsum('ijk,ki->ij', A, B)
-	#return np.einsum('ijk,ik->ij', A, B)
+	return np.einsum('ijk,ik->ij', A, B)
 
 # Problem 11 - Lina 
 def einsum_4(A, B):
