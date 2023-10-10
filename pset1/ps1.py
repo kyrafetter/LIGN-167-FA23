@@ -44,24 +44,12 @@ def train_model(x_vals,y_vals):
 
 #Problem 4 - Kyra
 def dL_da(x_vals,y_vals,a,b):
-	n = x_vals.size
-	x_sqrd = np.power(x_vals, 2)
-	ax_sqrd = a * x_sqrd
-	xy = x_vals * y_vals 
-	bx = b * y_vals
-	total 
+	
 	
 
 #Problem 5 - Lina -- COME BACK AND TEST THIS 
 def dL_db(x_vals,y_vals,a,b):
-	ax = a*x_vals
-	total_sum = 0 
-	temp = ax - y_vals
-	temp = temp + b
-	total_sum += np.sum(temp)
-	final_partial_b = 2 * total_sum
-	final_partial_b = final_partial_b/x_vals.size
-	return final_partial_b 
+	
 
 #Problem 6 - Oishani
 def gradient_descent_step(x_vals,y_vals,a,b,k=0.01):
