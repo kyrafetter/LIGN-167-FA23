@@ -13,14 +13,16 @@
 
 # 4
 """
-Link: https://chat.openai.com/share/94b7b159-d1a4-4ef5-8c99-ec7ce4460323
+Link: https://chat.openai.com/share/7ae8c1db-18ca-4d0d-bdd4-95eb1653b6ef
 GPT-3.5 makes a few less desireable descisions here. First, it writes a function
 f(xi, yi, a, b) which does not seem to have any utility in the scope of Problem
 4 (the following function dL_da does not call this first function). Also, even
 though GPT-3.5 imports numpy, it does not actually use functions from this
 package which results in the need for a for loop, creating unnecessarily long
-code. However, there are no significant mistakes.
+code. When asked to correct for these mistakes, GPT-3.5 successfully writes
+a more concise and correct function (see the Revised version).
 """
+# Initial
 import numpy as np
 
 def f(xi, yi, a, b):
@@ -44,44 +46,67 @@ b = 0.0
 partial_derivative = dL_da(x_vals, y_vals, a, b)
 print(partial_derivative)
 
+# Revised
+import numpy as np
+
+def dL_da(x_vals, y_vals, a, b):
+    n = len(x_vals)
+    
+    # Calculate the partial derivative ∂L/∂a
+    gradient = (-2/n) * np.sum((y_vals - a * x_vals - b) * x_vals)
+    
+    return gradient
+
+# Example usage:
+x_vals = np.array([1, 2, 3, 4, 5])
+y_vals = np.array([2, 3, 4, 5, 6])
+a = 1.0
+b = 0.5
+
+partial_derivative = dL_da(x_vals, y_vals, a, b)
+print("Partial derivative ∂L/∂a:", partial_derivative)
+
+
 #7
 """
-Link: https://chat.openai.com/share/34448b18-ffb9-4b4e-8448-ab90ba9e8b79
-GPT-3.5 almost provides a correct solution. One issue with the code it generates
-is the inclusion of the learning_rate parameter in the function header. GPT-3.5
-did not figure out that this parameter is initialized a value in the header of
-gradient_descent_step and therefore it thought it needed to include a 
-learning_rate parameter in the header of gradient_descent. However, this is not
-needed. Other than this, however, the function is correct. 
+https://chat.openai.com/share/6b8bf5c6-0855-44a5-85ae-02c520e529d4
+GPT-3.5 provides a correct solution after some help. Intially, I made sure that
+the gradient_descent_step function it wrote was correct and had to ask GPT-3.5
+to assume that the (1/n) factor was accounted for in the output of the dL_da
+and dL_db functions respectively. After making this correction, GPT-3.5 wrote
+a correct gradient_descent function; I did request that GPT-3.5 change the
+k=100 parameter to k=1000 as per the function header provided to us. 
 """
-def gradient_descent(x_vals, y_vals, a_0=0.0, b_0=0.0, k=100, learning_rate=0.01):
+# Assuming you have already defined the gradient_descent_step function
+def gradient_descent(x_vals, y_vals, a_0=0.0, b_0=0.0, k=1000):
     """
-    Perform k gradient descent steps.
+    Perform gradient descent to optimize parameters 'a' and 'b'.
 
     Args:
-    x_vals: List of x values
-    y_vals: List of corresponding y values
-    a_0: Initial value of parameter 'a' (default=0.0)
-    b_0: Initial value of parameter 'b' (default=0.0)
-    k: Number of gradient descent steps to perform (default=100)
-    learning_rate: Learning rate for gradient descent (default=0.01)
+    x_vals (list): List of x values.
+    y_vals (list): List of corresponding y values.
+    a_0 (float, optional): Initial value of parameter 'a'. Default is 0.0.
+    b_0 (float, optional): Initial value of parameter 'b'. Default is 0.0.
+    k (int, optional): Number of gradient descent steps to perform. Default is 1000.
 
     Returns:
-    Tuple (ak, bk): Final parameter values 'a' and 'b'
+    tuple: A tuple containing the final parameter values 'ak' and 'bk'.
     """
-    a_current = a_0
-    b_current = b_0
+    a_current, b_current = a_0, b_0
     
-    for step in range(k):
-        # Perform a single step of gradient descent using the provided function
-        a_current, b_current = gradient_descent_step(x_vals, y_vals, a_current, b_current, learning_rate)
+    for _ in range(k):
+        # Perform a single step of gradient descent
+        a_current, b_current = gradient_descent_step(x_vals, y_vals, a_current, b_current)
     
     return a_current, b_current
+
 
 #10
 """
 Link: https://chat.openai.com/share/3a924609-6bf6-4201-a3d9-1be5d576d2ce
-
+GPT-3.5 provides a correct solution to this problem, but does write some extra
+tests which are thorough but technically not needed under the assumptions
+of the problem.
 """
 import numpy as np
 
@@ -273,7 +298,10 @@ def gradient_descent(x_vals, y_vals, a_0=0, b_0=0, k=1000):
 # 10 
 """
 Link: https://chat.openai.com/share/5490482e-392a-4245-8ac4-4e52dee1d1b4
-
+GPT-4 provides a correct solution to this problem, but does write some extra
+tests (ie. test if A and B are numpy arrays and ensuring that dimensions are
+compatible) which are thorough but technically not needed under the assumptions
+of the problem.
 """
 import numpy as np
 
