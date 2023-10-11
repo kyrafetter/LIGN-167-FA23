@@ -69,7 +69,7 @@ def gradient_descent_step(x_vals,y_vals,a,b,k=0.01):
 	dLda_over_n = dL_da(x_vals,y_vals,a,b)
 	a_updated = a - (k*dLda_over_n)
 	dLdb_over_n = dL_db(x_vals,y_vals,a,b)
-	b_updated = b - (k*dLda_over_n)
+	b_updated = b - (k*dLdb_over_n)
 	return (a_updated, b_updated)
 
 #Problem 7  - Kyra
@@ -92,7 +92,7 @@ def einsum_1(A, B):
 
 # Problem 9 - Oishani
 def einsum_2(A, B):
-	return np.einsum...
+	return np.einsum('ij,j ->ij', A, B)
 
 # Problem 10 - Kyra
 def einsum_3(A, B):
