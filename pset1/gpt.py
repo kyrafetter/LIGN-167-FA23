@@ -6,10 +6,108 @@
 #  GPT 3.5 
 
 # 1
+'''
+Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
+
+GPT-3.5 does a good job overall, after I specified the formula from the question
+a couple of times. It uses the numpy functions efficiently and does the correct 
+calculations.
+'''
+import numpy as np
+
+def compute_slope_estimator(x_vals, y_vals):
+    # Check if the input arrays have the same length
+    if len(x_vals) != len(y_vals):
+        raise ValueError("Input arrays x_vals and y_vals must have the same length.")
+    
+    # Calculate n (number of data points)
+    n = len(x_vals)
+    
+    # Compute the mean of x_vals and y_vals
+    x_mean = np.mean(x_vals)
+    y_mean = np.mean(y_vals)
+    
+    # Calculate the numerator and denominator as specified
+    numerator = np.sum(x_vals * y_vals) - n * x_mean * y_mean
+    denominator = np.sum(x_vals**2) - n * x_mean**2
+    
+    # Compute the optimal value of the slope
+    slope = numerator / denominator
+    
+    return slope
+
+# Example with arrays of multiple values
+x_vals = np.array([1, 2, 3, 4, 5])
+y_vals = np.array([2, 4, 5, 4, 6])
+
+# Compute the optimal slope
+slope = compute_slope_estimator(x_vals, y_vals)
+
+# Print the result
+print("Optimal Slope:", slope)
+
 
 # 2 
+'''
+Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
+
+GPT 3.5 does this correctly even without the formula being complete 
+in the prompt. Since it uses the numpy functions for mean and sum,
+calculating the variable n is an unecessary step, but the overall 
+result is accurate.
+'''
+import numpy as np
+
+def compute_intercept_estimator(x, y):
+    # Check if the input arrays have the same length
+    if len(x) != len(y):
+        raise ValueError("Input arrays x and y must have the same length.")
+    
+    # Calculate n (number of data points)
+    n = len(x)
+    
+    # Compute the mean of x and y
+    x_mean = np.mean(x)
+    y_mean = np.mean(y)
+    
+    # Calculate the slope (using the previously defined function)
+    slope = compute_slope_estimator(x, y)
+    
+    # Calculate the intercept using Equation 5
+    intercept = y_mean - slope * x_mean
+    
+    return intercept
+
 
 # 3
+'''
+Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
+
+GPT 3.5 does a good job after it is specified to use the already defined
+functions and not to redefine them. It returns the required tuple.
+'''
+import numpy as np
+
+# Assume that compute_slope_estimator and compute_intercept_estimator are already defined.
+
+def train_model(x, y):
+    # Calculate the optimal slope and intercept by calling the existing functions
+    slope = compute_slope_estimator(x, y)
+    intercept = compute_intercept_estimator(x, y)
+    
+    return slope, intercept
+
+# Example data
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([2, 4, 5, 4, 6])
+
+# Train the model and get the optimal slope and intercept
+slope, intercept = train_model(x, y)
+
+# Print the results
+print("Optimal Slope:", slope)
+print("Optimal Intercept:", intercept)
+
 
 # 4
 """
@@ -44,6 +142,27 @@ b = 0.0
 partial_derivative = dL_da(x_vals, y_vals, a, b)
 print(partial_derivative)
 
+#6
+'''
+Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
+
+GPT 3.5 took some time to get this right, but with the prompts getting 
+sufficiently specific, it gave the correct results. With clarification 
+on the results of already defined functions dL_da and dL_db, it gave
+the right function.
+'''
+def gradient_descent_step(x_vals, y_vals, a, b, k):
+    # Calculate the partial derivatives using the provided functions
+    slope_derivative = dL_da(x_vals, y_vals, a, b)
+    intercept_derivative = dL_db(x_vals, y_vals, a, b)
+    
+    # Update a and b using gradient descent
+    a_updated = a - k * slope_derivative
+    b_updated = b - k * intercept_derivative
+    
+    return a_updated, b_updated
+
+
 #7
 """
 Link: https://chat.openai.com/share/34448b18-ffb9-4b4e-8448-ab90ba9e8b79
@@ -77,6 +196,30 @@ def gradient_descent(x_vals, y_vals, a_0=0.0, b_0=0.0, k=100, learning_rate=0.01
         a_current, b_current = gradient_descent_step(x_vals, y_vals, a_current, b_current, learning_rate)
     
     return a_current, b_current
+
+#9
+'''
+Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
+
+GPT 3.5 did this perfectly, accounting for edge-cases the first time,
+which it didn't do after being specified as per assignment guidelines.
+'''
+import numpy as np
+
+def einsum_2(A, B):
+    # Use np.einsum for element-wise multiplication
+    C = np.einsum('ij,j->ij', A, B)
+    
+    return C
+
+# Example usage:
+A = np.array([[1, 2, 3], [4, 5, 6]])
+B = np.array([0, 1, 2])
+
+result = einsum_2(A, B)
+
+print(result)
+
 
 #10
 """
@@ -211,10 +354,95 @@ C = batch_matmul(A, B)  # C will have shape (2, 4, 5)
 # GPT 4
 
 # 1
+'''
+Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
+
+GPT 4 did this correctly after the formula was specified.
+'''
+import numpy as np
+
+def compute_slope_estimator(x, y):
+    # Ensure x and y are numpy arrays and have the same length
+    assert len(x) == len(y), "x and y must have the same length"
+    x = np.array(x)
+    y = np.array(y)
+
+    # Calculate the means of x and y
+    xbar = np.mean(x)
+    ybar = np.mean(y)
+    
+    # Calculate the numerator and denominator for the slope
+    numerator = np.sum(x * y) - len(x) * xbar * ybar
+    denominator = np.sum(x**2) - len(x) * xbar**2
+
+    # Compute the slope estimator
+    b = numerator / denominator
+
+    return b
+
+# Example usage
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([2, 4, 6, 8, 10])
+print(compute_slope_estimator(x, y))  # Should print 2, since the relationship is y = 2x
+
 
 # 2 
+'''
+Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
+
+This took longer on GPT 4, since it kept redefining the function
+from Problem 1. After multiple clarifications, the result was exactly
+the amount of code we wanted.
+'''
+def compute_intercept_estimator(x, y):
+    # Get the slope from the previously defined function
+    a_xy = compute_slope_estimator(x, y)
+
+    # Calculate the means of x and y
+    xbar = np.mean(x)
+    ybar = np.mean(y)
+
+    # Compute the intercept estimator using the formula
+    b = ybar - a_xy * xbar
+
+    return b
+
+# Example usage
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([2, 4, 6, 8, 10])
+print(compute_intercept_estimator(x, y))  # Should print 0, since the relationship is y = 2x + 0
+
 
 # 3
+'''
+Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
+
+GPT 4 did this perfectly on the first try.
+'''
+def train_model(x, y):
+    """
+    Train a simple linear regression model on x and y.
+
+    Parameters:
+    - x: A 1-dimensional NumPy array representing the input features.
+    - y: A 1-dimensional NumPy array representing the labels.
+
+    Returns:
+    - A tuple (slope, intercept) representing the trained model.
+    """
+    
+    # Compute the optimal slope and intercept values
+    slope = compute_slope_estimator(x, y)
+    intercept = compute_intercept_estimator(x, y)
+    
+    return (slope, intercept)
+
+# Example usage
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([2, 4, 6, 8, 10])
+slope, intercept = train_model(x, y)
+print(f"Slope: {slope}, Intercept: {intercept}")  # Should print Slope: 2.0, Intercept: 0.0
+
 
 # 4
 
@@ -332,6 +560,40 @@ def dL_db_gpt_4(x_vals, y_vals, a, b):
 
 
 # 6
+'''
+Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
+
+GPT 4 did this perfectly after one clarification about the functions 
+already defined in Problem 4 and 5.
+'''
+def gradient_descent_step(x_vals, y_vals, a, b, k):
+    """
+    Perform a single step of gradient descent on linear regression parameters a and b.
+
+    Parameters:
+    - x_vals: A 1-dimensional NumPy array representing input features.
+    - y_vals: A 1-dimensional NumPy array representing labels.
+    - a: Current value of slope.
+    - b: Current value of intercept.
+    - k: Learning rate.
+
+    Returns:
+    - A tuple (a_updated, b_updated) representing updated values for slope and intercept.
+    """
+    
+    # Compute the gradients using provided functions
+    da = dL_da(x_vals, y_vals, a, b)
+    db = dL_db(x_vals, y_vals, a, b)
+    
+    # Gradient descent update
+    a_updated = a - k * da
+    b_updated = b - k * db
+    
+    return (a_updated, b_updated)
+
+# Assuming the functions dL_da and dL_db are already defined
+# Example usage would be similar to before
+
 
 # 7
 
@@ -361,6 +623,32 @@ def elementwise_product_4(A, B):
 
 
 # 9 
+'''
+Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
+
+GPT 4 did this perfectly with the first prompt.
+'''
+import numpy as np
+
+def matrix_vector_elementwise_multiply(A, B):
+    """
+    Element-wise multiplication of 2-D array A with 1-D array B using einsum.
+
+    Parameters:
+    - A: 2-D NumPy array of size (n, m).
+    - B: 1-D NumPy array of size (m).
+
+    Returns:
+    - 2-D array C of size (n, m) where Cij = Aij * Bj.
+    """
+    return np.einsum('ij,j->ij', A, B)
+
+# Example usage:
+A = np.array([[1, 2, 3], [4, 5, 6]])
+B = np.array([0, 1, 2])
+C = matrix_vector_elementwise_multiply(A, B)
+print(C)
+
 
 # 10 
 
