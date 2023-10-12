@@ -51,10 +51,10 @@ def dL_db(x_vals,y_vals,a,b):
 	"""
 	>>> dL_db(np.array([1, 2, 3, 4]), np.array([2, 4, 5, 4]), 1, 2)
 	1.5
-	# >>> dL_db(np.array([2, 4]), np.array([4, 7]), 0.5, 3)
-	# -3.5
-	# >>> dL_db(np.array([1, 3]), np.array([4, 6]), 1, 1)
-	# -3.0
+	>>> dL_db(np.array([2, 4]), np.array([4, 7]), 0.5, 3)
+	-2.0
+	>>> dL_db(np.array([1, 3]), np.array([4, 6]), 1, 1)
+	-4.0
 	"""
 	ax = a*x_vals
 	temp = (ax - y_vals) + b
@@ -86,14 +86,14 @@ def einsum_1(A, B):
 	>>> A = np.array([[1, 2, 3], [4, 5, 6]])
 	>>> B = np.array([[1, 0, 1], [0, 1, 0]])
 	>>> einsum_1(A, B)
-	array([[1, 0, 3], [0, 5, 0]])
+	array([[1,0,3], [0,5,0]])
 	"""
 	return np.einsum('ij, ij->ij', A, B)
 
-
 # Problem 9 - Oishani
 def einsum_2(A, B):
-	return np.einsum...
+	# return np.einsum...
+	...
 
 # Problem 10 - Kyra
 def einsum_3(A, B):
@@ -101,4 +101,14 @@ def einsum_3(A, B):
 
 # Problem 11 - Lina 
 def einsum_4(A, B):
+	"""
+	>>> A = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])
+    >>> B = np.array([[[1, 3], [2, 4]], [[5, 7], [6, 8]]])
+    >>> einsum_4(A, B)
+    array([[[  5,  11],
+            [ 11,  25]],
+    <BLANKLINE>
+           [[ 61,  83],
+            [ 83, 113]]])
+	"""
 	return np.einsum('ijk, ikq -> ijq', A, B)
