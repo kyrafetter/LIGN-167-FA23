@@ -46,7 +46,6 @@ slope = compute_slope_estimator(x_vals, y_vals)
 # Print the result
 print("Optimal Slope:", slope)
 
-
 # 2 
 '''
 Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
@@ -77,7 +76,6 @@ def compute_intercept_estimator(x, y):
     intercept = y_mean - slope * x_mean
     
     return intercept
-
 
 # 3
 '''
@@ -339,15 +337,6 @@ C = batch_matrix_vector_multiplication(A, B)
 # Output the result
 print(C)
 
-# 6
-
-# 7 
-
-
-# 9 
-
-# 10
-
 # 11
 """
 Link: https://chat.openai.com/share/ab51ccd4-35de-431b-9ff4-ae6b51de08dc
@@ -385,7 +374,6 @@ B = np.random.rand(2, 3, 5)  # B has shape (2, 3, 5)
 C = batch_matmul(A, B)  # C will have shape (2, 4, 5)
 
 
-
 # GPT 4
 
 # 1
@@ -420,7 +408,6 @@ x = np.array([1, 2, 3, 4, 5])
 y = np.array([2, 4, 6, 8, 10])
 print(compute_slope_estimator(x, y))  # Should print 2, since the relationship is y = 2x
 
-
 # 2 
 '''
 Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
@@ -446,7 +433,6 @@ def compute_intercept_estimator(x, y):
 x = np.array([1, 2, 3, 4, 5])
 y = np.array([2, 4, 6, 8, 10])
 print(compute_intercept_estimator(x, y))  # Should print 0, since the relationship is y = 2x + 0
-
 
 # 3
 '''
@@ -480,7 +466,6 @@ print(f"Slope: {slope}, Intercept: {intercept}")  # Should print Slope: 2.0, Int
 
 
 # 4
-
 """
 Link: https://chat.openai.com/share/f7c022a2-7abc-44d5-af1d-e6670714208d
 GPT-4 appears not to make any mistakes. The code is nicely commented, and GPT-4
@@ -507,64 +492,6 @@ def dL_da(x_vals, y_vals, a, b):
     derivative = -2 * np.sum(x_vals * (y_vals - a * x_vals - b)) / n
     return derivative
 
-# 7
-"""
-Link: https://chat.openai.com/share/f7bf4988-4bf4-4b35-89e6-8c053d8c3870
-GPT-4 does not appear to make any mistakes; it provides clean, concise, and
-well-commented code which makes correct use of the gradient_descent_step
-function implemented in the previous problem. 
-"""
-def gradient_descent(x_vals, y_vals, a_0=0, b_0=0, k=1000):
-    """
-    Performs k steps of the gradient descent optimization algorithm.
-    
-    Parameters:
-    - x_vals: List of x values
-    - y_vals: List of y values
-    - a_0: Initial coefficient a of the linear model
-    - b_0: Initial coefficient b of the linear model
-    - k: Number of gradient descent steps to perform
-    
-    Returns:
-    Tuple of final coefficients (a_k, b_k).
-    """
-    a, b = a_0, b_0
-    for _ in range(k):
-        a, b = gradient_descent_step(x_vals, y_vals, a, b)
-    return a, b
-
-# 10 
-"""
-Link: https://chat.openai.com/share/5490482e-392a-4245-8ac4-4e52dee1d1b4
-GPT-4 provides a correct solution to this problem, but does write some extra
-tests (ie. test if A and B are numpy arrays and ensuring that dimensions are
-compatible) which are thorough but technically not needed under the assumptions
-of the problem.
-"""
-import numpy as np
-
-def batch_matvec_mult(A, B):
-    """
-    Perform batch matrix-vector multiplication.
-    
-    Parameters:
-        A (np.array): A 3-D NumPy array with shape (b, n, m).
-        B (np.array): A 2-D NumPy array with shape (b, m).
-        
-    Returns:
-        C (np.array): A 2-D NumPy array with shape (b, n).
-    """
-    # Ensure the inputs are numpy arrays
-    A = np.array(A)
-    B = np.array(B)
-
-    # Check the shapes of A and B for compatibility
-    assert A.shape[2] == B.shape[1], "Incompatible shapes for matrix-vector multiplication."
-    
-    # Use Einstein summation convention to perform the batch matrix-vector multiplication
-    C = np.einsum('ijk,ik->ij', A, B)
-    
-    return C
 
 # 5
 """
@@ -598,7 +525,6 @@ y_vals = np.array([2, 4, 5, 4])
 a = 1
 b = 2
 print(dL_db(x_vals, y_vals, a, b))
-
 
 
 # 6
@@ -638,6 +564,31 @@ def gradient_descent_step(x_vals, y_vals, a, b, k):
 
 
 # 7
+"""
+Link: https://chat.openai.com/share/f7bf4988-4bf4-4b35-89e6-8c053d8c3870
+GPT-4 does not appear to make any mistakes; it provides clean, concise, and
+well-commented code which makes correct use of the gradient_descent_step
+function implemented in the previous problem. 
+"""
+def gradient_descent(x_vals, y_vals, a_0=0, b_0=0, k=1000):
+    """
+    Performs k steps of the gradient descent optimization algorithm.
+    
+    Parameters:
+    - x_vals: List of x values
+    - y_vals: List of y values
+    - a_0: Initial coefficient a of the linear model
+    - b_0: Initial coefficient b of the linear model
+    - k: Number of gradient descent steps to perform
+    
+    Returns:
+    Tuple of final coefficients (a_k, b_k).
+    """
+    a, b = a_0, b_0
+    for _ in range(k):
+        a, b = gradient_descent_step(x_vals, y_vals, a, b)
+    return a, b
+
 
 # 8 
 """
@@ -666,6 +617,7 @@ def elementwise_product_4(A, B):
     C = np.einsum('ij,ij->ij', A, B)
     
     return C
+
 
 # 9 
 '''
@@ -696,6 +648,38 @@ print(C)
 
 
 # 10 
+"""
+Link: https://chat.openai.com/share/5490482e-392a-4245-8ac4-4e52dee1d1b4
+GPT-4 provides a correct solution to this problem, but does write some extra
+tests (ie. test if A and B are numpy arrays and ensuring that dimensions are
+compatible) which are thorough but technically not needed under the assumptions
+of the problem.
+"""
+import numpy as np
+
+def batch_matvec_mult(A, B):
+    """
+    Perform batch matrix-vector multiplication.
+    
+    Parameters:
+        A (np.array): A 3-D NumPy array with shape (b, n, m).
+        B (np.array): A 2-D NumPy array with shape (b, m).
+        
+    Returns:
+        C (np.array): A 2-D NumPy array with shape (b, n).
+    """
+    # Ensure the inputs are numpy arrays
+    A = np.array(A)
+    B = np.array(B)
+
+    # Check the shapes of A and B for compatibility
+    assert A.shape[2] == B.shape[1], "Incompatible shapes for matrix-vector multiplication."
+    
+    # Use Einstein summation convention to perform the batch matrix-vector multiplication
+    C = np.einsum('ijk,ik->ij', A, B)
+    
+    return C
+
 
 # 11
 """
