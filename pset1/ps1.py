@@ -21,8 +21,8 @@ def compute_slope_estimator(x_vals,y_vals):
 	y_bar = np.mean(y_vals)
 	numerator = np.sum(x_vals*y_vals) - (n*x_bar*y_bar)
 	denominator = np.sum(x_vals**2) - (n*(x_bar**2))
-	a = numerator/denominator
-	return a		
+	a = float(numerator)/float(denominator)
+	return a
 	
 
 
