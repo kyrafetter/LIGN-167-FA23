@@ -9,18 +9,10 @@ from numpy.random import randn
 #Problem 1 - Oishani
 def compute_slope_estimator(x_vals,y_vals):
 	n = len(x_vals)
-	x_bar = float((np.sum(x_vals))/n)
-	y_bar = float((np.sum(y_vals))/n)
-	numerator_sum = 0
-	for i in range(0,n):
-		prod = x_vals[i]*y_vals[i]
-		numerator_sum += prod
-	numerator = float(numerator_sum - (n*x_bar*y_bar))
-	denom_sum = 0
-	for i in range(0,n):
-		prod = x_vals[i]*x_vals[i]
-		denom_sum += prod
-	denominator = float(denom_sum - (n*x_bar*x_bar))
+	x_bar = np.mean(x_vals)
+	y_bar = np.mean(y_vals)
+	numerator = np.sum(x_vals*y_vals) - (n*x_bar*y_bar)
+	denominator = np.sum(x_vals**2) - (n*(x_bar**2))
 	a = numerator/denominator
 	return a		
 	
