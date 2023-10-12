@@ -60,7 +60,7 @@ print("Optimal Slope:", slope)
 # Problem 2 - Oishani
 '''
 Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
-GPT 3.5 does this correctly even without the formula being complete 
+GPT-3.5 does this correctly even without the formula being complete 
 in the prompt. Since it uses the numpy functions for mean and sum,
 calculating the variable n is an unecessary step, but the overall 
 result is accurate.
@@ -92,7 +92,7 @@ def compute_intercept_estimator(x, y):
 # Problem 3 - Oishani
 '''
 Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
-GPT 3.5 does a good job after it is specified to use the already defined
+GPT-3.5 does a good job after it is specified to use the already defined
 functions and not to redefine them. It returns the required tuple.
 '''
 import numpy as np
@@ -180,10 +180,11 @@ print("Partial derivative ∂L/∂a:", partial_derivative)
 # Problem 5 - Lina 
 '''
 Link: https://chat.openai.com/share/c10bfe80-f1c5-48e3-9e7f-64b5508b8a84
-Correction to #5 - chatGPT 3.5 creating a new function for f but it was never
-used. Also, although not wrong, the code it wrote is longer than necessary which leads 
-to un desirable steps that are taking place. Instead of utilizing array multiplication, 
-it uses for a loop to go through all the values, which leads to excess uncessary code. 
+Correction to #5 - GPT-3.5 created a new function for f, but it was never
+used. Also, although not wrong, the code it wrote is longer than necessary which
+leads to undesirable steps that are taking place. Instead of utilizing array
+multiplication, it uses for a loop to go through all the values, which leads
+to excess uncessary code. 
 '''
 def f(xi, yi, a, b):
     return (yi - a * xi - b) ** 2
@@ -213,7 +214,7 @@ print("Partial derivative ∂L/∂b:", partial_derivative)
 # Problem 6 - Oishani
 '''
 Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
-GPT 3.5 took some time to get this right, but with the prompts getting 
+GPT-3.5 took some time to get this right, but with the prompts getting 
 sufficiently specific, it gave the correct results. With clarification 
 on the results of already defined functions dL_da and dL_db, it gave
 the right function.
@@ -269,8 +270,8 @@ def gradient_descent(x_vals, y_vals, a_0=0.0, b_0=0.0, k=1000):
 # Problem 8 - Lina 
 """
 Link: https://chat.openai.com/share/3f04c113-22e6-4903-9646-6f0a9f119453
-There were no issues when with this problem for chatGPT 3.5. Please note that 
-when I prompted chatGPT 3.5 with this question, I did included the instructions that 
+There were no issues when with this problem for GPT-3.5. Please note that 
+when I prompted GPT-3.5 with this question, I did included the instructions that 
 np.einsum should be used. 
 """
 import numpy as np
@@ -297,7 +298,7 @@ print(C)
 # Problem 9 - Oishani
 '''
 Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
-GPT 3.5 did this perfectly, accounting for edge-cases the first time,
+GPT-3.5 did this perfectly, accounting for edge-cases the first time,
 which it didn't do after being specified as per assignment guidelines.
 '''
 import numpy as np
@@ -323,7 +324,8 @@ print(result)
 Link: https://chat.openai.com/share/3a924609-6bf6-4201-a3d9-1be5d576d2ce
 GPT-3.5 provides a correct solution to this problem, but does write some extra
 tests which are thorough but technically not needed under the assumptions
-of the problem.
+of the problem. I also needed to specify that GPT-3.5 should use the np.einsum
+function because it did not do so initially.
 """
 import numpy as np
 
@@ -360,11 +362,12 @@ print(C)
 # Problem 11 - Lina 
 """
 Link: https://chat.openai.com/share/ab51ccd4-35de-431b-9ff4-ae6b51de08dc
-Initially, when first prompting chatGPT 3.5, I didn't mention that it should np.einsum(), which lead 
-to an unnecessary amount of code being included. It was using a for-loop, np.zeros, and np.dot to 
-complete this problem. However, when I included additional instruction to use np.einsum() to complete 
-the problem, it did so without any additional code or errors. It did include an additional edge case
-test to account for any invalid inputs. 
+Initially, when first prompting GPT-3.5, I didn't mention that it should
+np.einsum(), which lead to an unnecessary amount of code being included. It was
+using a for-loop, np.zeros, and np.dot to complete this problem. However, when
+I included additional instruction to use np.einsum() to complete the problem,
+it did so without any additional code or errors. It did include an additional
+edge case test to account for any invalid inputs. 
 """
 def batch_matmul_3_5(A, B):
     """
@@ -402,7 +405,7 @@ C = batch_matmul(A, B)  # C will have shape (2, 4, 5)
 # Problem 1 - Oishani
 '''
 Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
-GPT 4 did this correctly after the formula was specified.
+GPT-4 did this correctly after the formula was specified.
 '''
 import numpy as np
 
@@ -435,7 +438,7 @@ print(compute_slope_estimator(x, y))  # Should print 2, since the relationship i
 # Problem 2 - Oishani
 '''
 Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
-This took longer on GPT 4, since it kept redefining the function
+This took longer on GPT-4, since it kept redefining the function
 from Problem 1. After multiple clarifications, the result was exactly
 the amount of code we wanted.
 '''
@@ -462,7 +465,7 @@ print(compute_intercept_estimator(x, y))  # Should print 0, since the relationsh
 # Problem 3 - Oishani
 '''
 Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
-GPT 4 did this perfectly on the first try.
+GPT-4 did this perfectly on the first try.
 '''
 def train_model(x, y):
     """
@@ -557,7 +560,7 @@ print(dL_db(x_vals, y_vals, a, b))
 # Problem 6 - Oishani
 '''
 Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
-GPT 4 did this perfectly after one clarification about the functions 
+GPT-4 did this perfectly after one clarification about the functions 
 already defined in Problem 4 and 5.
 '''
 def gradient_descent_step(x_vals, y_vals, a, b, k):
@@ -621,9 +624,9 @@ def gradient_descent(x_vals, y_vals, a_0=0, b_0=0, k=1000):
 # Problem 8 - Lina
 """
 Link: https://chat.openai.com/share/f1892baa-dbe7-439b-95e0-3739d8c7ba32
-The code that chatGPT 4 gave me to solve this problem was correct. However, as I was 
-trying to test my function, I prompted it to give me doctests, which were wrong. I asked it to fix / double 
-check this mistake, but it still got it wrong. 
+The code that GPT-4 gave me to solve this problem was correct. However, as I was 
+trying to test my function, I prompted it to give me doctests, which were wrong.
+I asked it to fix / double check this mistake, but it still got it wrong. 
 """
 def elementwise_product_4(A, B):
     """
@@ -651,7 +654,7 @@ def elementwise_product_4(A, B):
 # Problem 9 - Oishani
 '''
 Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
-GPT 4 did this perfectly with the first prompt.
+GPT-4 did this perfectly with the first prompt.
 '''
 import numpy as np
 
@@ -715,7 +718,7 @@ def batch_matvec_mult(A, B):
 """
 Link: https://chat.openai.com/share/3c234bd6-2b16-42a0-b30a-0236a80984ef
 When I initially input my question, without specificfying that it needed to use 
-np.einsum, it wrote the solution using np.matmul. However, after further 
+np.einsum, GPT-4 wrote the solution using np.matmul. However, after further 
 prompting it to use np.einsum(), it wrote correct code and included 
 code for edge cases. 
 """
