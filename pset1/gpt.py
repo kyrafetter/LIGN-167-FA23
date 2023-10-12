@@ -3,6 +3,12 @@ LIGN 167 PSET 1
 Kyra Fetter, A16819058
 Lina Battikha, A16852105
 Oishani Bandopadhyay, A1600827
+
+Group Member Contributions:
+Kyra: Problems 4, 7, 10 (python code, GPT-3.5, GPT-4, testing)
+Lina: Problems 5, 8, 11 (python code, GPT-3.5, GPT-4, testing)
+Oishani: Problems 1, 2, 3, 6, 9 (python code, GPT-3.5, GPT-4, testing)
+Everyone: GitHub version control, formatting the documents, debugging
 '''
 
 ################################################################################
