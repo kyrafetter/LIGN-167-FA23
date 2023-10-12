@@ -45,7 +45,7 @@ def train_model(x_vals,y_vals):
 def dL_da(x_vals,y_vals,a,b):
 	dl_da = 2 * np.sum((a * np.power(x_vals, 2)) - (x_vals * y_vals) + (b * x_vals))
 	return (1 / float(x_vals.size)) * dl_da
-#Problem 5 - Lina - doctest that chat gpt was wrong. 
+#Problem 5 - Lina 
 
 def dL_db(x_vals,y_vals,a,b):
 	"""
@@ -80,7 +80,7 @@ def gradient_descent(x_vals,y_vals,a_0=0,b_0=0,k=1000):
 	return a_b 
 
 
-# Problem 8  Lina -- fix doctest, right now it's not working 
+# Problem 8 - Lina
 def einsum_1(A, B):
 	"""
 	>>> A = np.array([[1, 2, 3], [4, 5, 6]])
