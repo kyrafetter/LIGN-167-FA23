@@ -67,6 +67,40 @@ partial_derivative = dL_da(x_vals, y_vals, a, b)
 print("Partial derivative ∂L/∂a:", partial_derivative)
 
 
+
+# 5
+'''
+Correction to #5 - chatGPT 3.5 creating a new function for f but it was never
+used. Also, although not wrong, the code it wrote is longer than necessary which leads 
+to un desirable steps that are taking place. Instead of utilizing array multiplication, 
+it uses for a loop to go through all the values, which leads to excess uncessary code. 
+
+Link to chatGPT 3.5 conversation: https://chat.openai.com/share/c10bfe80-f1c5-48e3-9e7f-64b5508b8a84
+'''
+def f(xi, yi, a, b):
+    return (yi - a * xi - b) ** 2
+
+def dL_db_3_5(x_vals, y_vals, a, b):
+    n = len(x_vals)
+    partial_sum = 0
+    
+    for i in range(n):
+        xi = x_vals[i]
+        yi = y_vals[i]
+        partial_sum += -2 * (yi - a * xi - b)
+    
+    return (1 / n) * partial_sum
+
+# Example usage:
+x_vals = np.array([1, 2, 3, 4, 5])
+y_vals = np.array([2, 4, 6, 8, 10])
+a = 2
+b = 1
+
+partial_derivative = dL_db(x_vals, y_vals, a, b)
+print("Partial derivative ∂L/∂b:", partial_derivative)
+
+
 #7
 """
 https://chat.openai.com/share/6b8bf5c6-0855-44a5-85ae-02c520e529d4
@@ -138,44 +172,17 @@ C = batch_matrix_vector_multiplication(A, B)
 # Output the result
 print(C)
 
-
-
-# 5
-def f(xi, yi, a, b):
-    return (yi - a * xi - b) ** 2
-
-def dL_db_3_5(x_vals, y_vals, a, b):
-    n = len(x_vals)
-    partial_sum = 0
-    
-    for i in range(n):
-        xi = x_vals[i]
-        yi = y_vals[i]
-        partial_sum += -2 * (yi - a * xi - b)
-    
-    return (1 / n) * partial_sum
-
-# Example usage:
-x_vals = np.array([1, 2, 3, 4, 5])
-y_vals = np.array([2, 4, 6, 8, 10])
-a = 2
-b = 1
-
-partial_derivative = dL_db(x_vals, y_vals, a, b)
-print("Partial derivative ∂L/∂b:", partial_derivative)
-
-# Link to chatGPT 3.5 conversation: https://chat.openai.com/share/c10bfe80-f1c5-48e3-9e7f-64b5508b8a84
-'''
-Correction to #5 - chatGPT 3.5 creating a new function for f but it was never
-used. Also, although not wrong, the code it wrote is longer than necessary. 
-'''
-
-
 # 6
 
 # 7 
 
 # 8 
+"""
+Link: https://chat.openai.com/share/3f04c113-22e6-4903-9646-6f0a9f119453
+There were no issues when with this problem for chatGPT 3.5. Please note that 
+when I prompted chatGPT 3.5 with this question, I did included the instructions that 
+np.einsum should be used. 
+"""
 import numpy as np
 
 def multiply_matrices_3_5(A, B):
@@ -195,14 +202,20 @@ B = np.array([[1, 0, 1], [0, 1, 0]])
 C = multiply_matrices(A, B)
 print(C)
 
-# https://chat.openai.com/share/3f04c113-22e6-4903-9646-6f0a9f119453
-
 
 # 9 
 
 # 10
 
 # 11
+"""
+Link: https://chat.openai.com/share/ab51ccd4-35de-431b-9ff4-ae6b51de08dc
+Initially, when first prompting chatGPT 3.5, I didn't mention that it should np.einsum(), which lead 
+to an unnecessary amount of code being included. It was using a for-loop, np.zeros, and np.dot to 
+complete this problem. However, when I included additional instruction to use np.einsum() to complete 
+the problem, it did so without any additional code or errors. It did include an additional edge case
+test to account for any invalid inputs. 
+"""
 def batch_matmul_3_5(A, B):
     """
     Perform batch matrix multiplication between A and B using np.einsum.
@@ -230,7 +243,6 @@ B = np.random.rand(2, 3, 5)  # B has shape (2, 3, 5)
 # Perform batch matrix multiplication
 C = batch_matmul(A, B)  # C will have shape (2, 4, 5)
 
-# link to conversation: https://chat.openai.com/share/ab51ccd4-35de-431b-9ff4-ae6b51de08dc
 
 
 # GPT 4
@@ -329,7 +341,12 @@ def batch_matvec_mult(A, B):
     return C
 
 # 5
-
+"""
+Link: https://chat.openai.com/share/c78cfcef-ed0c-4b8e-abea-cf794fa4f763
+There were no errors in the solution. The only difference that did occur
+was including the negative multiplication which lead to a different ordering 
+from what I did -- but essentially the same thing. 
+"""
 def dL_db_gpt_4(x_vals, y_vals, a, b):
     """
     Compute the partial derivative of L with respect to b.
@@ -349,14 +366,13 @@ def dL_db_gpt_4(x_vals, y_vals, a, b):
     dLdb = np.sum(df_db) / n
     return dLdb
 
-# Example usage:
-# x_vals = np.array([1, 2, 3, 4])
-# y_vals = np.array([2, 4, 5, 4])
-# a = 1
-# b = 2
-# print(dL_db(x_vals, y_vals, a, b))
+Example usage:
+x_vals = np.array([1, 2, 3, 4])
+y_vals = np.array([2, 4, 5, 4])
+a = 1
+b = 2
+print(dL_db(x_vals, y_vals, a, b))
 
-# Link to chat conversation: https://chat.openai.com/share/c78cfcef-ed0c-4b8e-abea-cf794fa4f763
 
 
 # 6
@@ -364,6 +380,12 @@ def dL_db_gpt_4(x_vals, y_vals, a, b):
 # 7
 
 # 8 
+"""
+Link: https://chat.openai.com/share/f1892baa-dbe7-439b-95e0-3739d8c7ba32
+The code that chatGPT 4 gave me to solve this problem was correct. However, as I was 
+trying to test my function, I prompted it to give me doctests, which were wrong. I asked it to fix / double 
+check this mistake, but it still got it wrong. 
+"""
 def elementwise_product_4(A, B):
     """
     Compute the element-wise product of two matrices A and B using Einstein summation.
@@ -385,14 +407,18 @@ def elementwise_product_4(A, B):
     
     return C
 
-# Link to chat conversation: https://chat.openai.com/share/f1892baa-dbe7-439b-95e0-3739d8c7ba32
-
-
 # 9 
 
 # 10 
 
 # 11
+"""
+Link: https://chat.openai.com/share/3c234bd6-2b16-42a0-b30a-0236a80984ef
+When I initially input my question, without specificfying that it needed to use 
+np.einsum, it wrote the solution using np.matmul. However, after further 
+prompting it to use np.einsum(), it wrote correct code and included 
+code for edge cases. 
+"""
 
 import numpy as np
 
@@ -430,4 +456,3 @@ B = np.random.rand(b, m, p)
 # Get the batch matrix multiplication result
 C = batch_matmul_einsum(A, B)
 
-# Link to chat conversation: https://chat.openai.com/share/3c234bd6-2b16-42a0-b30a-0236a80984ef
