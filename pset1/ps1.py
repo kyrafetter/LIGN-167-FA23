@@ -43,7 +43,7 @@ def train_model(x_vals,y_vals):
 
 #Problem 4 - Kyra
 def dL_da(x_vals,y_vals,a,b):
-	dl_da = 2 * np.sum((a * np.power(x_vals, 2)) - (x_vals * y_vals) + (b * x_vals))
+	dl_da = 2 * (np.sum((a * np.power(x_vals, 2)) - (x_vals * y_vals) + (b * x_vals)))
 	return (1 / float(x_vals.size)) * dl_da
 #Problem 5 - Lina 
 
