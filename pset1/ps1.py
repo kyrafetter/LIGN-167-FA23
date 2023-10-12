@@ -72,7 +72,6 @@ def dL_db(x_vals,y_vals,a,b):
 
 # Problem 6 - Oishani
 def gradient_descent_step(x_vals,y_vals,a,b,k=0.01):
-  
 	dLda_over_n = dL_da(x_vals,y_vals,a,b)
 	a_updated = a - (k*dLda_over_n)
 	dLdb_over_n = dL_db(x_vals,y_vals,a,b)
