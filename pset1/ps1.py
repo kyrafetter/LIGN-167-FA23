@@ -2,7 +2,7 @@
 LIGN 167 PSET 1
 Kyra Fetter, A16819058
 Lina Battikha, A16852105
-Oishani Bandopadhyay, A1600827
+Oishani Bandopadhyay, A16800427
 
 Group Member Contributions:
 Kyra: Problems 4, 7, 10 (python code, GPT-3.5, GPT-4, testing)
@@ -28,8 +28,8 @@ def compute_slope_estimator(x_vals,y_vals):
 
 # Problem 2 - Oishani
 def compute_intercept_estimator(x_vals,y_vals):
-	x_bar = float((np.sum(x_vals))/n)
-	y_bar = float((np.sum(y_vals))/n)
+	x_bar = np.mean(x_vals)
+	y_bar = np.mean(y_vals)
 	a = compute_slope_estimator(x_vals,y_vals)
 	b = y_bar - (a*x_bar)
 	return b
