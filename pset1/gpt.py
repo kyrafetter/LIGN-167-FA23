@@ -1,14 +1,17 @@
-## LIGN 167 PSET 1
-## Kyra Fetter, A16819058
-## Lina Battikha, A16852105
-## Oishani Bandopadhyay, A1600827
+'''
+LIGN 167 PSET 1
+Kyra Fetter, A16819058
+Lina Battikha, A16852105
+Oishani Bandopadhyay, A1600827
+'''
 
-#  GPT 3.5 
+################################################################################
+#################################  GPT-3.5 #####################################
+################################################################################
 
-# 1
+# Problem 1 - Oishani
 '''
 Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
-
 GPT-3.5 does a good job overall, after I specified the formula from the question
 a couple of times. It uses the numpy functions efficiently and does the correct 
 calculations.
@@ -46,10 +49,11 @@ slope = compute_slope_estimator(x_vals, y_vals)
 # Print the result
 print("Optimal Slope:", slope)
 
-# 2 
+
+
+# Problem 2 - Oishani
 '''
 Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
-
 GPT 3.5 does this correctly even without the formula being complete 
 in the prompt. Since it uses the numpy functions for mean and sum,
 calculating the variable n is an unecessary step, but the overall 
@@ -77,10 +81,11 @@ def compute_intercept_estimator(x, y):
     
     return intercept
 
-# 3
+
+
+# Problem 3 - Oishani
 '''
 Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
-
 GPT 3.5 does a good job after it is specified to use the already defined
 functions and not to redefine them. It returns the required tuple.
 '''
@@ -107,7 +112,8 @@ print("Optimal Slope:", slope)
 print("Optimal Intercept:", intercept)
 
 
-# 4
+
+# Problem 4 - Kyra
 """
 Link: https://chat.openai.com/share/7ae8c1db-18ca-4d0d-bdd4-95eb1653b6ef
 GPT-3.5 makes a few less desireable descisions here. First, it writes a function
@@ -164,14 +170,14 @@ partial_derivative = dL_da(x_vals, y_vals, a, b)
 print("Partial derivative ∂L/∂a:", partial_derivative)
 
 
-# 5
+
+# Problem 5 - Lina 
 '''
+Link: https://chat.openai.com/share/c10bfe80-f1c5-48e3-9e7f-64b5508b8a84
 Correction to #5 - chatGPT 3.5 creating a new function for f but it was never
 used. Also, although not wrong, the code it wrote is longer than necessary which leads 
 to un desirable steps that are taking place. Instead of utilizing array multiplication, 
 it uses for a loop to go through all the values, which leads to excess uncessary code. 
-
-Link to chatGPT 3.5 conversation: https://chat.openai.com/share/c10bfe80-f1c5-48e3-9e7f-64b5508b8a84
 '''
 def f(xi, yi, a, b):
     return (yi - a * xi - b) ** 2
@@ -196,10 +202,11 @@ b = 1
 partial_derivative = dL_db(x_vals, y_vals, a, b)
 print("Partial derivative ∂L/∂b:", partial_derivative)
 
-#6
+
+
+# Problem 6 - Oishani
 '''
 Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
-
 GPT 3.5 took some time to get this right, but with the prompts getting 
 sufficiently specific, it gave the correct results. With clarification 
 on the results of already defined functions dL_da and dL_db, it gave
@@ -217,7 +224,8 @@ def gradient_descent_step(x_vals, y_vals, a, b, k):
     return a_updated, b_updated
 
 
-#7
+
+# Problem 7  - Kyra
 """
 https://chat.openai.com/share/6b8bf5c6-0855-44a5-85ae-02c520e529d4
 GPT-3.5 provides a correct solution after some help. Intially, I made sure that
@@ -250,7 +258,9 @@ def gradient_descent(x_vals, y_vals, a_0=0.0, b_0=0.0, k=1000):
     
     return a_current, b_current
   
-# 8 
+
+
+# Problem 8 - Lina 
 """
 Link: https://chat.openai.com/share/3f04c113-22e6-4903-9646-6f0a9f119453
 There were no issues when with this problem for chatGPT 3.5. Please note that 
@@ -277,10 +287,10 @@ C = multiply_matrices(A, B)
 print(C)
 
 
-#9
+
+# Problem 9 - Oishani
 '''
 Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
-
 GPT 3.5 did this perfectly, accounting for edge-cases the first time,
 which it didn't do after being specified as per assignment guidelines.
 '''
@@ -300,7 +310,9 @@ result = einsum_2(A, B)
 
 print(result)
 
-#10
+
+
+# Problem 10 - Kyra
 """
 Link: https://chat.openai.com/share/3a924609-6bf6-4201-a3d9-1be5d576d2ce
 GPT-3.5 provides a correct solution to this problem, but does write some extra
@@ -337,7 +349,9 @@ C = batch_matrix_vector_multiplication(A, B)
 # Output the result
 print(C)
 
-# 11
+
+
+# Problem 11 - Lina 
 """
 Link: https://chat.openai.com/share/ab51ccd4-35de-431b-9ff4-ae6b51de08dc
 Initially, when first prompting chatGPT 3.5, I didn't mention that it should np.einsum(), which lead 
@@ -374,12 +388,14 @@ B = np.random.rand(2, 3, 5)  # B has shape (2, 3, 5)
 C = batch_matmul(A, B)  # C will have shape (2, 4, 5)
 
 
-# GPT 4
 
-# 1
+################################################################################
+#################################  GPT-4 #######################################
+################################################################################
+
+# Problem 1 - Oishani
 '''
 Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
-
 GPT 4 did this correctly after the formula was specified.
 '''
 import numpy as np
@@ -408,10 +424,11 @@ x = np.array([1, 2, 3, 4, 5])
 y = np.array([2, 4, 6, 8, 10])
 print(compute_slope_estimator(x, y))  # Should print 2, since the relationship is y = 2x
 
-# 2 
+
+
+# Problem 2 - Oishani
 '''
 Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
-
 This took longer on GPT 4, since it kept redefining the function
 from Problem 1. After multiple clarifications, the result was exactly
 the amount of code we wanted.
@@ -434,10 +451,11 @@ x = np.array([1, 2, 3, 4, 5])
 y = np.array([2, 4, 6, 8, 10])
 print(compute_intercept_estimator(x, y))  # Should print 0, since the relationship is y = 2x + 0
 
-# 3
+
+
+# Problem 3 - Oishani
 '''
 Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
-
 GPT 4 did this perfectly on the first try.
 '''
 def train_model(x, y):
@@ -465,7 +483,8 @@ slope, intercept = train_model(x, y)
 print(f"Slope: {slope}, Intercept: {intercept}")  # Should print Slope: 2.0, Intercept: 0.0
 
 
-# 4
+
+# Problem 4 - Kyra
 """
 Link: https://chat.openai.com/share/f7c022a2-7abc-44d5-af1d-e6670714208d
 GPT-4 appears not to make any mistakes. The code is nicely commented, and GPT-4
@@ -493,7 +512,8 @@ def dL_da(x_vals, y_vals, a, b):
     return derivative
 
 
-# 5
+
+# Problem 5 - Lina
 """
 Link: https://chat.openai.com/share/c78cfcef-ed0c-4b8e-abea-cf794fa4f763
 There were no errors in the solution. The only difference that did occur
@@ -527,10 +547,10 @@ b = 2
 print(dL_db(x_vals, y_vals, a, b))
 
 
-# 6
+
+# Problem 6 - Oishani
 '''
 Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
-
 GPT 4 did this perfectly after one clarification about the functions 
 already defined in Problem 4 and 5.
 '''
@@ -563,7 +583,8 @@ def gradient_descent_step(x_vals, y_vals, a, b, k):
 # Example usage would be similar to before
 
 
-# 7
+
+# Problem 7  - Kyra
 """
 Link: https://chat.openai.com/share/f7bf4988-4bf4-4b35-89e6-8c053d8c3870
 GPT-4 does not appear to make any mistakes; it provides clean, concise, and
@@ -590,7 +611,8 @@ def gradient_descent(x_vals, y_vals, a_0=0, b_0=0, k=1000):
     return a, b
 
 
-# 8 
+
+# Problem 8 - Lina
 """
 Link: https://chat.openai.com/share/f1892baa-dbe7-439b-95e0-3739d8c7ba32
 The code that chatGPT 4 gave me to solve this problem was correct. However, as I was 
@@ -619,10 +641,10 @@ def elementwise_product_4(A, B):
     return C
 
 
-# 9 
+
+# Problem 9 - Oishani
 '''
 Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
-
 GPT 4 did this perfectly with the first prompt.
 '''
 import numpy as np
@@ -647,7 +669,8 @@ C = matrix_vector_elementwise_multiply(A, B)
 print(C)
 
 
-# 10 
+
+# Problem 10 - Kyra
 """
 Link: https://chat.openai.com/share/5490482e-392a-4245-8ac4-4e52dee1d1b4
 GPT-4 provides a correct solution to this problem, but does write some extra
@@ -681,7 +704,8 @@ def batch_matvec_mult(A, B):
     return C
 
 
-# 11
+
+# Problem 11 - Lina 
 """
 Link: https://chat.openai.com/share/3c234bd6-2b16-42a0-b30a-0236a80984ef
 When I initially input my question, without specificfying that it needed to use 
@@ -725,4 +749,3 @@ B = np.random.rand(b, m, p)
 
 # Get the batch matrix multiplication result
 C = batch_matmul_einsum(A, B)
-
