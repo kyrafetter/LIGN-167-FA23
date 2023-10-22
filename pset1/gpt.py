@@ -1,26 +1,136 @@
-## LIGN 167 PSET 1
-## Kyra Fetter, A16819058
-## Lina Battikha, A16852105
-## Oishani Bandopadhyay, A1600827
+'''
+LIGN 167 PSET 1
+Kyra Fetter, A16819058
+Lina Battikha, A16852105
+Oishani Bandopadhyay, A1600827
 
-#  GPT 3.5 
+Group Member Contributions:
+Kyra: Problems 4, 7, 10 (python code, GPT-3.5, GPT-4, testing)
+Lina: Problems 5, 8, 11 (python code, GPT-3.5, GPT-4, testing)
+Oishani: Problems 1, 2, 3, 6, 9 (python code, GPT-3.5, GPT-4, testing)
+Everyone: GitHub version control, formatting the documents, debugging
+'''
 
-# 1
+################################################################################
+#################################  GPT-3.5 #####################################
+################################################################################
 
-# 2 
+# Problem 1 - Oishani
+'''
+Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
+GPT-3.5 does a good job overall, after I specified the formula from the question
+a couple of times. It uses the numpy functions efficiently and does the correct 
+calculations.
+'''
+import numpy as np
 
-# 3
+def compute_slope_estimator(x_vals, y_vals):
+    # Check if the input arrays have the same length
+    if len(x_vals) != len(y_vals):
+        raise ValueError("Input arrays x_vals and y_vals must have the same length.")
+    
+    # Calculate n (number of data points)
+    n = len(x_vals)
+    
+    # Compute the mean of x_vals and y_vals
+    x_mean = np.mean(x_vals)
+    y_mean = np.mean(y_vals)
+    
+    # Calculate the numerator and denominator as specified
+    numerator = np.sum(x_vals * y_vals) - n * x_mean * y_mean
+    denominator = np.sum(x_vals**2) - n * x_mean**2
+    
+    # Compute the optimal value of the slope
+    slope = numerator / denominator
+    
+    return slope
 
-# 4
+# Example with arrays of multiple values
+x_vals = np.array([1, 2, 3, 4, 5])
+y_vals = np.array([2, 4, 5, 4, 6])
+
+# Compute the optimal slope
+slope = compute_slope_estimator(x_vals, y_vals)
+
+# Print the result
+print("Optimal Slope:", slope)
+
+
+
+# Problem 2 - Oishani
+'''
+Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
+GPT-3.5 does this correctly even without the formula being complete 
+in the prompt. Since it uses the numpy functions for mean and sum,
+calculating the variable n is an unecessary step, but the overall 
+result is accurate.
+'''
+import numpy as np
+
+def compute_intercept_estimator(x, y):
+    # Check if the input arrays have the same length
+    if len(x) != len(y):
+        raise ValueError("Input arrays x and y must have the same length.")
+    
+    # Calculate n (number of data points)
+    n = len(x)
+    
+    # Compute the mean of x and y
+    x_mean = np.mean(x)
+    y_mean = np.mean(y)
+    
+    # Calculate the slope (using the previously defined function)
+    slope = compute_slope_estimator(x, y)
+    
+    # Calculate the intercept using Equation 5
+    intercept = y_mean - slope * x_mean
+    
+    return intercept
+
+
+
+# Problem 3 - Oishani
+'''
+Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
+GPT-3.5 does a good job after it is specified to use the already defined
+functions and not to redefine them. It returns the required tuple.
+'''
+import numpy as np
+
+# Assume that compute_slope_estimator and compute_intercept_estimator are already defined.
+
+def train_model(x, y):
+    # Calculate the optimal slope and intercept by calling the existing functions
+    slope = compute_slope_estimator(x, y)
+    intercept = compute_intercept_estimator(x, y)
+    
+    return slope, intercept
+
+# Example data
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([2, 4, 5, 4, 6])
+
+# Train the model and get the optimal slope and intercept
+slope, intercept = train_model(x, y)
+
+# Print the results
+print("Optimal Slope:", slope)
+print("Optimal Intercept:", intercept)
+
+
+
+# Problem 4 - Kyra
 """
-Link: https://chat.openai.com/share/94b7b159-d1a4-4ef5-8c99-ec7ce4460323
+Link: https://chat.openai.com/share/7ae8c1db-18ca-4d0d-bdd4-95eb1653b6ef
 GPT-3.5 makes a few less desireable descisions here. First, it writes a function
 f(xi, yi, a, b) which does not seem to have any utility in the scope of Problem
 4 (the following function dL_da does not call this first function). Also, even
 though GPT-3.5 imports numpy, it does not actually use functions from this
 package which results in the need for a for loop, creating unnecessarily long
-code. However, there are no significant mistakes.
+code. When asked to correct for these mistakes, GPT-3.5 successfully writes
+a more concise and correct function (see the Revised version).
 """
+# Initial
 import numpy as np
 
 def f(xi, yi, a, b):
@@ -44,44 +154,178 @@ b = 0.0
 partial_derivative = dL_da(x_vals, y_vals, a, b)
 print(partial_derivative)
 
-#7
+
+# Revised
+import numpy as np
+
+def dL_da(x_vals, y_vals, a, b):
+    n = len(x_vals)
+    
+    # Calculate the partial derivative ∂L/∂a
+    gradient = (-2/n) * np.sum((y_vals - a * x_vals - b) * x_vals)
+    
+    return gradient
+
+# Example usage:
+x_vals = np.array([1, 2, 3, 4, 5])
+y_vals = np.array([2, 3, 4, 5, 6])
+a = 1.0
+b = 0.5
+
+partial_derivative = dL_da(x_vals, y_vals, a, b)
+print("Partial derivative ∂L/∂a:", partial_derivative)
+
+
+
+# Problem 5 - Lina 
+'''
+Link: https://chat.openai.com/share/c10bfe80-f1c5-48e3-9e7f-64b5508b8a84
+Correction to #5 - GPT-3.5 created a new function for f, but it was never
+used. Also, although not wrong, the code it wrote is longer than necessary which
+leads to undesirable steps that are taking place. Instead of utilizing array
+multiplication, it uses for a loop to go through all the values, which leads
+to excess uncessary code. 
+'''
+def f(xi, yi, a, b):
+    return (yi - a * xi - b) ** 2
+
+def dL_db_3_5(x_vals, y_vals, a, b):
+    n = len(x_vals)
+    partial_sum = 0
+    
+    for i in range(n):
+        xi = x_vals[i]
+        yi = y_vals[i]
+        partial_sum += -2 * (yi - a * xi - b)
+    
+    return (1 / n) * partial_sum
+
+# Example usage:
+x_vals = np.array([1, 2, 3, 4, 5])
+y_vals = np.array([2, 4, 6, 8, 10])
+a = 2
+b = 1
+
+partial_derivative = dL_db(x_vals, y_vals, a, b)
+print("Partial derivative ∂L/∂b:", partial_derivative)
+
+
+
+# Problem 6 - Oishani
+'''
+Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
+GPT-3.5 took some time to get this right, but with the prompts getting 
+sufficiently specific, it gave the correct results. With clarification 
+on the results of already defined functions dL_da and dL_db, it gave
+the right function.
+'''
+def gradient_descent_step(x_vals, y_vals, a, b, k):
+    # Calculate the partial derivatives using the provided functions
+    slope_derivative = dL_da(x_vals, y_vals, a, b)
+    intercept_derivative = dL_db(x_vals, y_vals, a, b)
+    
+    # Update a and b using gradient descent
+    a_updated = a - k * slope_derivative
+    b_updated = b - k * intercept_derivative
+    
+    return a_updated, b_updated
+
+
+
+# Problem 7  - Kyra
 """
-Link: https://chat.openai.com/share/34448b18-ffb9-4b4e-8448-ab90ba9e8b79
-GPT-3.5 almost provides a correct solution. One issue with the code it generates
-is the inclusion of the learning_rate parameter in the function header. GPT-3.5
-did not figure out that this parameter is initialized a value in the header of
-gradient_descent_step and therefore it thought it needed to include a 
-learning_rate parameter in the header of gradient_descent. However, this is not
-needed. Other than this, however, the function is correct. 
+https://chat.openai.com/share/6b8bf5c6-0855-44a5-85ae-02c520e529d4
+GPT-3.5 provides a correct solution after some help. Intially, I made sure that
+the gradient_descent_step function it wrote was correct and had to ask GPT-3.5
+to assume that the (1/n) factor was accounted for in the output of the dL_da
+and dL_db functions respectively. After making this correction, GPT-3.5 wrote
+a correct gradient_descent function; I did request that GPT-3.5 change the
+k=100 parameter to k=1000 as per the function header provided to us. 
 """
-def gradient_descent(x_vals, y_vals, a_0=0.0, b_0=0.0, k=100, learning_rate=0.01):
+# Assuming you have already defined the gradient_descent_step function
+def gradient_descent(x_vals, y_vals, a_0=0.0, b_0=0.0, k=1000):
     """
-    Perform k gradient descent steps.
+    Perform gradient descent to optimize parameters 'a' and 'b'.
 
     Args:
-    x_vals: List of x values
-    y_vals: List of corresponding y values
-    a_0: Initial value of parameter 'a' (default=0.0)
-    b_0: Initial value of parameter 'b' (default=0.0)
-    k: Number of gradient descent steps to perform (default=100)
-    learning_rate: Learning rate for gradient descent (default=0.01)
+    x_vals (list): List of x values.
+    y_vals (list): List of corresponding y values.
+    a_0 (float, optional): Initial value of parameter 'a'. Default is 0.0.
+    b_0 (float, optional): Initial value of parameter 'b'. Default is 0.0.
+    k (int, optional): Number of gradient descent steps to perform. Default is 1000.
 
     Returns:
-    Tuple (ak, bk): Final parameter values 'a' and 'b'
+    tuple: A tuple containing the final parameter values 'ak' and 'bk'.
     """
-    a_current = a_0
-    b_current = b_0
+    a_current, b_current = a_0, b_0
     
-    for step in range(k):
-        # Perform a single step of gradient descent using the provided function
-        a_current, b_current = gradient_descent_step(x_vals, y_vals, a_current, b_current, learning_rate)
+    for _ in range(k):
+        # Perform a single step of gradient descent
+        a_current, b_current = gradient_descent_step(x_vals, y_vals, a_current, b_current)
     
     return a_current, b_current
+  
 
-#10
+
+# Problem 8 - Lina 
+"""
+Link: https://chat.openai.com/share/3f04c113-22e6-4903-9646-6f0a9f119453
+There were no issues when with this problem for GPT-3.5. Please note that 
+when I prompted GPT-3.5 with this question, I did included the instructions that 
+np.einsum should be used. 
+"""
+import numpy as np
+
+def multiply_matrices_3_5(A, B):
+    # Check if the input arrays have the same shape
+    if A.shape != B.shape:
+        raise ValueError("Input arrays A and B must have the same shape")
+
+    # Use np.einsum to multiply the matrices element-wise
+    C = np.einsum('ij,ij->ij', A, B)
+
+    return C
+
+# Example usage:
+A = np.array([[1, 2, 3], [4, 5, 6]])
+B = np.array([[1, 0, 1], [0, 1, 0]])
+
+C = multiply_matrices(A, B)
+print(C)
+
+
+
+# Problem 9 - Oishani
+'''
+Link: https://chat.openai.com/share/5d5197b0-a401-480c-82c3-15c76d3c01c8
+GPT-3.5 did this perfectly, accounting for edge-cases the first time,
+which it didn't do after being specified as per assignment guidelines.
+'''
+import numpy as np
+
+def einsum_2(A, B):
+    # Use np.einsum for element-wise multiplication
+    C = np.einsum('ij,j->ij', A, B)
+    
+    return C
+
+# Example usage:
+A = np.array([[1, 2, 3], [4, 5, 6]])
+B = np.array([0, 1, 2])
+
+result = einsum_2(A, B)
+
+print(result)
+
+
+
+# Problem 10 - Kyra
 """
 Link: https://chat.openai.com/share/3a924609-6bf6-4201-a3d9-1be5d576d2ce
-
+GPT-3.5 provides a correct solution to this problem, but does write some extra
+tests which are thorough but technically not needed under the assumptions
+of the problem. I also needed to specify that GPT-3.5 should use the np.einsum
+function because it did not do so initially.
 """
 import numpy as np
 
@@ -115,69 +359,16 @@ print(C)
 
 
 
-# 5
-def f(xi, yi, a, b):
-    return (yi - a * xi - b) ** 2
-
-def dL_db_3_5(x_vals, y_vals, a, b):
-    n = len(x_vals)
-    partial_sum = 0
-    
-    for i in range(n):
-        xi = x_vals[i]
-        yi = y_vals[i]
-        partial_sum += -2 * (yi - a * xi - b)
-    
-    return (1 / n) * partial_sum
-
-# Example usage:
-x_vals = np.array([1, 2, 3, 4, 5])
-y_vals = np.array([2, 4, 6, 8, 10])
-a = 2
-b = 1
-
-partial_derivative = dL_db(x_vals, y_vals, a, b)
-print("Partial derivative ∂L/∂b:", partial_derivative)
-
-# Link to chatGPT 3.5 conversation: https://chat.openai.com/share/c10bfe80-f1c5-48e3-9e7f-64b5508b8a84
-'''
-Correction to #5 - chatGPT 3.5 creating a new function for f but it was never
-used. Also, although not wrong, the code it wrote is longer than necessary. 
-'''
-
-
-# 6
-
-# 7 
-
-# 8 
-import numpy as np
-
-def multiply_matrices_3_5(A, B):
-    # Check if the input arrays have the same shape
-    if A.shape != B.shape:
-        raise ValueError("Input arrays A and B must have the same shape")
-
-    # Use np.einsum to multiply the matrices element-wise
-    C = np.einsum('ij,ij->ij', A, B)
-
-    return C
-
-# Example usage:
-A = np.array([[1, 2, 3], [4, 5, 6]])
-B = np.array([[1, 0, 1], [0, 1, 0]])
-
-C = multiply_matrices(A, B)
-print(C)
-
-# https://chat.openai.com/share/3f04c113-22e6-4903-9646-6f0a9f119453
-
-
-# 9 
-
-# 10
-
-# 11
+# Problem 11 - Lina 
+"""
+Link: https://chat.openai.com/share/ab51ccd4-35de-431b-9ff4-ae6b51de08dc
+Initially, when first prompting GPT-3.5, I didn't mention that it should
+np.einsum(), which lead to an unnecessary amount of code being included. It was
+using a for-loop, np.zeros, and np.dot to complete this problem. However, when
+I included additional instruction to use np.einsum() to complete the problem,
+it did so without any additional code or errors. It did include an additional
+edge case test to account for any invalid inputs. 
+"""
 def batch_matmul_3_5(A, B):
     """
     Perform batch matrix multiplication between A and B using np.einsum.
@@ -205,19 +396,104 @@ B = np.random.rand(2, 3, 5)  # B has shape (2, 3, 5)
 # Perform batch matrix multiplication
 C = batch_matmul(A, B)  # C will have shape (2, 4, 5)
 
-# link to conversation: https://chat.openai.com/share/ab51ccd4-35de-431b-9ff4-ae6b51de08dc
 
 
-# GPT 4
+################################################################################
+#################################  GPT-4 #######################################
+################################################################################
 
-# 1
+# Problem 1 - Oishani
+'''
+Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
+GPT-4 did this correctly after the formula was specified.
+'''
+import numpy as np
 
-# 2 
+def compute_slope_estimator(x, y):
+    # Ensure x and y are numpy arrays and have the same length
+    assert len(x) == len(y), "x and y must have the same length"
+    x = np.array(x)
+    y = np.array(y)
 
-# 3
+    # Calculate the means of x and y
+    xbar = np.mean(x)
+    ybar = np.mean(y)
+    
+    # Calculate the numerator and denominator for the slope
+    numerator = np.sum(x * y) - len(x) * xbar * ybar
+    denominator = np.sum(x**2) - len(x) * xbar**2
 
-# 4
+    # Compute the slope estimator
+    b = numerator / denominator
 
+    return b
+
+# Example usage
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([2, 4, 6, 8, 10])
+print(compute_slope_estimator(x, y))  # Should print 2, since the relationship is y = 2x
+
+
+
+# Problem 2 - Oishani
+'''
+Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
+This took longer on GPT-4, since it kept redefining the function
+from Problem 1. After multiple clarifications, the result was exactly
+the amount of code we wanted.
+'''
+def compute_intercept_estimator(x, y):
+    # Get the slope from the previously defined function
+    a_xy = compute_slope_estimator(x, y)
+
+    # Calculate the means of x and y
+    xbar = np.mean(x)
+    ybar = np.mean(y)
+
+    # Compute the intercept estimator using the formula
+    b = ybar - a_xy * xbar
+
+    return b
+
+# Example usage
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([2, 4, 6, 8, 10])
+print(compute_intercept_estimator(x, y))  # Should print 0, since the relationship is y = 2x + 0
+
+
+
+# Problem 3 - Oishani
+'''
+Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
+GPT-4 did this perfectly on the first try.
+'''
+def train_model(x, y):
+    """
+    Train a simple linear regression model on x and y.
+
+    Parameters:
+    - x: A 1-dimensional NumPy array representing the input features.
+    - y: A 1-dimensional NumPy array representing the labels.
+
+    Returns:
+    - A tuple (slope, intercept) representing the trained model.
+    """
+    
+    # Compute the optimal slope and intercept values
+    slope = compute_slope_estimator(x, y)
+    intercept = compute_intercept_estimator(x, y)
+    
+    return (slope, intercept)
+
+# Example usage
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([2, 4, 6, 8, 10])
+slope, intercept = train_model(x, y)
+print(f"Slope: {slope}, Intercept: {intercept}")  # Should print Slope: 2.0, Intercept: 0.0
+
+
+
+# Problem 4 - Kyra
 """
 Link: https://chat.openai.com/share/f7c022a2-7abc-44d5-af1d-e6670714208d
 GPT-4 appears not to make any mistakes. The code is nicely commented, and GPT-4
@@ -244,7 +520,80 @@ def dL_da(x_vals, y_vals, a, b):
     derivative = -2 * np.sum(x_vals * (y_vals - a * x_vals - b)) / n
     return derivative
 
-# 7
+
+
+# Problem 5 - Lina
+"""
+Link: https://chat.openai.com/share/c78cfcef-ed0c-4b8e-abea-cf794fa4f763
+There were no errors in the solution. The only difference that did occur
+was including the negative multiplication which lead to a different ordering 
+from what I did -- but essentially the same thing. 
+"""
+def dL_db_gpt_4(x_vals, y_vals, a, b):
+    """
+    Compute the partial derivative of L with respect to b.
+    
+    Parameters:
+    - x_vals: 1-D numpy array of x values.
+    - y_vals: 1-D numpy array of y values.
+    - a, b: Parameters of the function f.
+    
+    Returns:
+    - dLdb: Partial derivative of L with respect to b.
+    """
+    n = len(x_vals)
+    # Compute the derivative for each pair (x_i, y_i)
+    df_db = 2 * (y_vals - a * x_vals - b) * (-1)
+    # Sum all the derivatives and divide by n
+    dLdb = np.sum(df_db) / n
+    return dLdb
+
+Example usage:
+x_vals = np.array([1, 2, 3, 4])
+y_vals = np.array([2, 4, 5, 4])
+a = 1
+b = 2
+print(dL_db(x_vals, y_vals, a, b))
+
+
+
+# Problem 6 - Oishani
+'''
+Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
+GPT-4 did this perfectly after one clarification about the functions 
+already defined in Problem 4 and 5.
+'''
+def gradient_descent_step(x_vals, y_vals, a, b, k):
+    """
+    Perform a single step of gradient descent on linear regression parameters a and b.
+
+    Parameters:
+    - x_vals: A 1-dimensional NumPy array representing input features.
+    - y_vals: A 1-dimensional NumPy array representing labels.
+    - a: Current value of slope.
+    - b: Current value of intercept.
+    - k: Learning rate.
+
+    Returns:
+    - A tuple (a_updated, b_updated) representing updated values for slope and intercept.
+    """
+    
+    # Compute the gradients using provided functions
+    da = dL_da(x_vals, y_vals, a, b)
+    db = dL_db(x_vals, y_vals, a, b)
+    
+    # Gradient descent update
+    a_updated = a - k * da
+    b_updated = b - k * db
+    
+    return (a_updated, b_updated)
+
+# Assuming the functions dL_da and dL_db are already defined
+# Example usage would be similar to before
+
+
+
+# Problem 7  - Kyra
 """
 Link: https://chat.openai.com/share/f7bf4988-4bf4-4b35-89e6-8c053d8c3870
 GPT-4 does not appear to make any mistakes; it provides clean, concise, and
@@ -270,10 +619,73 @@ def gradient_descent(x_vals, y_vals, a_0=0, b_0=0, k=1000):
         a, b = gradient_descent_step(x_vals, y_vals, a, b)
     return a, b
 
-# 10 
+
+
+# Problem 8 - Lina
+"""
+Link: https://chat.openai.com/share/f1892baa-dbe7-439b-95e0-3739d8c7ba32
+The code that GPT-4 gave me to solve this problem was correct. However, as I was 
+trying to test my function, I prompted it to give me doctests, which were wrong.
+I asked it to fix / double check this mistake, but it still got it wrong. 
+"""
+def elementwise_product_4(A, B):
+    """
+    Compute the element-wise product of two matrices A and B using Einstein summation.
+    
+    Parameters:
+    A, B: 2D NumPy arrays of the same size (n x m).
+    
+    Returns:
+    C: 2D NumPy array (n x m) where C[i,j] = A[i,j] * B[i,j].
+    """
+    # Check if A and B have the same shape
+    if A.shape != B.shape:
+        raise ValueError("Input matrices A and B must have the same shape")
+    
+    # Use np.einsum to compute the element-wise product
+    # 'ij,ij->ij' indicates that we take element i,j from A and multiply it with element i,j from B, 
+    # and place the result in position i,j in the output array
+    C = np.einsum('ij,ij->ij', A, B)
+    
+    return C
+
+
+
+# Problem 9 - Oishani
+'''
+Link: https://chat.openai.com/share/6e666bed-aab3-4939-ac2b-0f5ed6098997
+GPT-4 did this perfectly with the first prompt.
+'''
+import numpy as np
+
+def matrix_vector_elementwise_multiply(A, B):
+    """
+    Element-wise multiplication of 2-D array A with 1-D array B using einsum.
+
+    Parameters:
+    - A: 2-D NumPy array of size (n, m).
+    - B: 1-D NumPy array of size (m).
+
+    Returns:
+    - 2-D array C of size (n, m) where Cij = Aij * Bj.
+    """
+    return np.einsum('ij,j->ij', A, B)
+
+# Example usage:
+A = np.array([[1, 2, 3], [4, 5, 6]])
+B = np.array([0, 1, 2])
+C = matrix_vector_elementwise_multiply(A, B)
+print(C)
+
+
+
+# Problem 10 - Kyra
 """
 Link: https://chat.openai.com/share/5490482e-392a-4245-8ac4-4e52dee1d1b4
-
+GPT-4 provides a correct solution to this problem, but does write some extra
+tests (ie. test if A and B are numpy arrays and ensuring that dimensions are
+compatible) which are thorough but technically not needed under the assumptions
+of the problem.
 """
 import numpy as np
 
@@ -300,71 +712,16 @@ def batch_matvec_mult(A, B):
     
     return C
 
-# 5
-
-def dL_db_gpt_4(x_vals, y_vals, a, b):
-    """
-    Compute the partial derivative of L with respect to b.
-    
-    Parameters:
-    - x_vals: 1-D numpy array of x values.
-    - y_vals: 1-D numpy array of y values.
-    - a, b: Parameters of the function f.
-    
-    Returns:
-    - dLdb: Partial derivative of L with respect to b.
-    """
-    n = len(x_vals)
-    # Compute the derivative for each pair (x_i, y_i)
-    df_db = 2 * (y_vals - a * x_vals - b) * (-1)
-    # Sum all the derivatives and divide by n
-    dLdb = np.sum(df_db) / n
-    return dLdb
-
-# Example usage:
-# x_vals = np.array([1, 2, 3, 4])
-# y_vals = np.array([2, 4, 5, 4])
-# a = 1
-# b = 2
-# print(dL_db(x_vals, y_vals, a, b))
-
-# Link to chat conversation: https://chat.openai.com/share/c78cfcef-ed0c-4b8e-abea-cf794fa4f763
 
 
-# 6
-
-# 7
-
-# 8 
-def elementwise_product_4(A, B):
-    """
-    Compute the element-wise product of two matrices A and B using Einstein summation.
-    
-    Parameters:
-    A, B: 2D NumPy arrays of the same size (n x m).
-    
-    Returns:
-    C: 2D NumPy array (n x m) where C[i,j] = A[i,j] * B[i,j].
-    """
-    # Check if A and B have the same shape
-    if A.shape != B.shape:
-        raise ValueError("Input matrices A and B must have the same shape")
-    
-    # Use np.einsum to compute the element-wise product
-    # 'ij,ij->ij' indicates that we take element i,j from A and multiply it with element i,j from B, 
-    # and place the result in position i,j in the output array
-    C = np.einsum('ij,ij->ij', A, B)
-    
-    return C
-
-# Link to chat conversation: https://chat.openai.com/share/f1892baa-dbe7-439b-95e0-3739d8c7ba32
-
-
-# 9 
-
-# 10 
-
-# 11
+# Problem 11 - Lina 
+"""
+Link: https://chat.openai.com/share/3c234bd6-2b16-42a0-b30a-0236a80984ef
+When I initially input my question, without specificfying that it needed to use 
+np.einsum, GPT-4 wrote the solution using np.matmul. However, after further 
+prompting it to use np.einsum(), it wrote correct code and included 
+code for edge cases. 
+"""
 
 import numpy as np
 
@@ -401,5 +758,3 @@ B = np.random.rand(b, m, p)
 
 # Get the batch matrix multiplication result
 C = batch_matmul_einsum(A, B)
-
-# Link to chat conversation: https://chat.openai.com/share/3c234bd6-2b16-42a0-b30a-0236a80984ef
