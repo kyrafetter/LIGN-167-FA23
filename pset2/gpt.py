@@ -1,8 +1,8 @@
 '''
-LIGN 167 PSET 1
+LIGN 167 PSET 2
 Kyra Fetter, A16819058
 Lina Battikha, A16852105
-Oishani Bandopadhyay, A1600827
+Oishani Bandopadhyay, A16800427
 
 Group Member Contributions:
 Kyra: 
