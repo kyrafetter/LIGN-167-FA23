@@ -143,18 +143,24 @@ def logistic_partial_derivative(y,x,a,j):
 def compute_logistic_gradient(a,y,x):
     # YOUR CODE HERE
 
-# PROBLEM 5
+# PROBLEM 5 - Kyra
 def gradient_update(a,lr,gradient):
-    # YOUR CODE HERE
+     a_initial = a
+     a_update = a_initial - (lr * gradient)
+     return a_update
 
-# PROBLEM 6
+# PROBLEM 6 - Kyra
 def gradient_descent_logistic(initial_a,lr,num_iterations,y,x):
-    # YOUR CODE HERE
+     a_current = initial_a
+     for _ in num_iterations:
+          gradient = compute_logistic_gradient(a_current, y, x)
+          a_current = gradient_update(a_current, lr, gradient)
+      return a_current         
 
-# PROBLEM 7
+# PROBLEM 7 - Kyra
 # Free Response Answer Here: 
 
-# PROBLEM 8
+# PROBLEM 8 - Kyra
 # Free Response Answer Here: 
 
 # PROBLEM 9
