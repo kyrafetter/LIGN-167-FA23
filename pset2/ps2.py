@@ -161,9 +161,28 @@ def gradient_descent_logistic(initial_a,lr,num_iterations,y,x):
 
 # PROBLEM 7 - Kyra
 # Free Response Answer Here: 
+'''
+The function __init__ is the constructor for the TorchLogisticClassifier class. When a new
+TorchLogisticClassifier object is instantiated, this constructor is automatically called. In this
+case, in line 67 (super().__init__()). the constructor first inherits the attributes and methods
+defined in PyTorch's nn.Module class. Next, in line 68 (self.weights = nn.Parameter(torch.zeros(num_features))),
+the constructor initializes the weights attribute of the object. The weights attrubute is a tensor of size
+num_features, all of which are initialized to zero in line 68 using torch.zeros.
+
+Line 90 (model = TorchLogisticClassifier(num_features)) implicitly calls the function __init__
+when a new TorchLogisticClassifier object named model is instantiated.
+'''
 
 # PROBLEM 8 - Kyra
-# Free Response Answer Here: 
+# Free Response Answer Here:
+'''
+The mathematical function computed by the forward method of TorchLogisticClassifier is the
+sigmiod function of logistic regression, which returns a probability between 0 and 1. 
+
+This function is first called on line 102 (prediction = model(d_x)) when input is first passed into
+the model. forward is implicitly called in order to compute the output prediction of model when
+given this input of d_x.
+'''
 
 # PROBLEM 9
 # Free Response Answer Here: 
