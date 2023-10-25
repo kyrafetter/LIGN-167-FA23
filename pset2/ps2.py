@@ -144,18 +144,20 @@ def compute_logistic_gradient(a,y,x):
     # YOUR CODE HERE
 
 # PROBLEM 5 - Kyra
+# Note: I checked my code using GPT-4, but made no updates as it was correct
 def gradient_update(a,lr,gradient):
      a_initial = a
      a_update = a_initial - (lr * gradient)
      return a_update
 
 # PROBLEM 6 - Kyra
+# Note: I checked my code using GPT-4. I added the range statement to the for loop condition
 def gradient_descent_logistic(initial_a,lr,num_iterations,y,x):
      a_current = initial_a
-     for _ in num_iterations:
+     for _ in range(num_iterations):
           gradient = compute_logistic_gradient(a_current, y, x)
           a_current = gradient_update(a_current, lr, gradient)
-      return a_current         
+     return a_current
 
 # PROBLEM 7 - Kyra
 # Free Response Answer Here: 
