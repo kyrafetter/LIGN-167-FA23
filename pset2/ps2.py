@@ -165,4 +165,32 @@ def gradient_descent_logistic(initial_a,lr,num_iterations,y,x):
 
 # PROBLEM 11
 def batched_gradient_descent(dataset, num_epochs=10, learning_rate=0.01, batch_size=2):
-	# YOUR CODE HERE
+    first_example = dataset[0]
+    first_example_x = first_example[0]
+    first_example_y = first_example[1]
+    num_features = first_example_x.size(0)
+    
+    model = TorchLogisticClassifier(num_features)
+    optimizer = optim.SGD(model.parameters(), lr=learning_rate)
+
+    for i in range(num_epochs):
+        for batch_start in range(0, len(dataset), batch_size):
+            batch_end = batch_start + batch_size
+            batch = dataset[batch_start:batch_end]
+
+            optimizer.zero_grad()  
+		
+            sum_loss = 0
+            for d in batch:
+                d_x = d[0]
+                d_y = d[1]
+                prediction = model(d_x)
+                loss = loss_fn(prediction, d_y)
+		    
+                sum_loss += loss 
+
+            (sum_loss/batch_size).backward() 
+            optimizer.step()  # Update weights once per batch
+
+    return model
+	
