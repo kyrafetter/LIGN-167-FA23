@@ -7,7 +7,7 @@ Oishani Bandopadhyay, A16800427
 Group Member Contributions:
 Kyra: 
 Lina: 
-Oishani: 
+Oishani: 9, 10, 11
 Everyone: 
 '''
 
@@ -250,11 +250,119 @@ model.
  
 
 # PROBLEM 9
+'''
+Link: https://chat.openai.com/share/4f5c9744-113d-4eee-b139-59264ee620c5
+GPT-3.5 provides a correct response to this problem. It breaks down each step of the
+given function and explains how the steps are connected to SGD. 
+
+******** GPT-3.5 Solution: ********
+
+Here's a breakdown of what each line is doing in the context of SGD:
+
+for d in dataset:: This is the start of the inner loop, iterating over individual data 
+points in the dataset. In SGD, we update the model's parameters for each data point (or a 
+mini-batch of data points) rather than the entire dataset at once.
+
+d_x = d[0]: This line extracts the feature vector (d_x) from the current data point d.
+
+d_y = d[1]: This line extracts the true label (d_y) from the current data point d.
+
+prediction = model(d_x): Here, the model computes a prediction (probability) for the input
+feature vector d_x using the logistic regression model.
+
+loss = loss_fn(prediction, d_y): This line calculates the loss between the predicted 
+probability (prediction) and the true label d_y using the binary cross-entropy loss function 
+(loss_fn). This loss measures how well the model is performing on the current data point.
+
+loss.backward(): This line computes the gradients of the model's parameters with respect to 
+the calculated loss. In other words, it calculates how much each parameter should be adjusted to 
+minimize the loss.
+
+optimizer.step(): Finally, this line updates the model's parameters using the gradients computed 
+in the previous step. The optimizer (in this case, SGD) adjusts the weights of the logistic 
+regression model to minimize the loss for the current data point.
+
+The inner loop iterates through the entire dataset, one data point at a time, and updates the 
+model's parameters in a way that minimizes the loss for each individual data point. This is the
+essence of stochastic gradient descent (SGD), where the gradient descent updates are made in a 
+stochastic (random) manner, leading to potentially faster convergence and better generalization.
+'''
 
 
 # PROBLEM 10
+'''
+Link: https://chat.openai.com/share/4f5c9744-113d-4eee-b139-59264ee620c5
+GPT-3.5 provides a correct response to this problem, although its first 
+response was unecessarily long and complicated. After asking for a shorter
+explanation, it gave a concise answer that explains the role of the code line
+optimizer.zero_grad() well.
+
+******** GPT-3.5 Solution: ********
+
+Certainly, here's a shorter explanation:
+
+optimizer.zero_grad() resets the gradients of model parameters, ensuring that each data
+point's gradient is computed and applied separately. Without it, gradients accumulate 
+across data points, leading to incorrect parameter updates and potentially causing the 
+algorithm to work incorrectly.
+'''
  
 
 # PROBLEM 11
+'''
+Link: https://chat.openai.com/share/4f5c9744-113d-4eee-b139-59264ee620c5
+GPT-3.5 provides a correct response to this problem. It is a bit different
+in terms of indicing the for loops than the way I did, but it still makes
+sense and would work very similarly. The general steps are followed clearly
+and correctly for batched gradient descent.
+
+******** GPT-3.5 Solution: ********
+'''
+import torch
+import torch.optim as optim
+
+def batched_gradient_descent(dataset, num_epochs=10, learning_rate=0.01, batch_size=2):
+    num_data_points = len(dataset)
+    num_batches = num_data_points // batch_size
+
+    # Define the model and optimizer
+    first_example = dataset[0]
+    first_example_x = first_example[0]
+    num_features = first_example_x.size(0)
+    model = TorchLogisticClassifier(num_features)
+    optimizer = optim.SGD(model.parameters(), lr=learning_rate)
+
+    for epoch in range(num_epochs):
+        for batch_idx in range(num_batches):
+            # Define the start and end indices of the current batch
+            start_idx = batch_idx * batch_size
+            end_idx = (batch_idx + 1) * batch_size
+
+            # Initialize gradients for the current batch
+            optimizer.zero_grad()
+
+            # Calculate the batch loss as the average of losses for the batch
+            batch_loss = 0
+
+            # Iterate over data points in the current batch
+            for i in range(start_idx, end_idx):
+                d_x, d_y = dataset[i]
+
+                # Compute the prediction and loss for the current data point
+                prediction = model(d_x)
+                loss = loss_fn(prediction, d_y)
+
+                # Accumulate the loss for the batch
+                batch_loss += loss
+
+            # Average the batch loss by dividing by batch_size
+            batch_loss /= batch_size
+
+            # Perform backpropagation and parameter update
+            batch_loss.backward()
+            optimizer.step()
+
+    return model
+
 
 
