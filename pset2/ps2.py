@@ -152,26 +152,52 @@ def logistic_partial_derivative(y,x,a,j):
 # PROBLEM 4 - Lina
 def compute_logistic_gradient(a,y,x):
     # YOUR CODE HERE
-  gradient = np.zeros(len(a))
-  for j in range(len(gradient)):
+    gradient = np.zeros(len(a))
+    for j in range(len(gradient)):
       gradient[j] = logistic_partial_derivative(y, x, a, j) 
     
-  return gradient
-# PROBLEM 5
+    return gradient
+
+# PROBLEM 5 - Kyra
+# Note: I checked my code using GPT-4, but made no updates as it was correct
 def gradient_update(a,lr,gradient):
-    # YOUR CODE HERE
-  ...
+     a_initial = a
+     a_update = a_initial - (lr * gradient)
+     return a_update
 
-# PROBLEM 6
+# PROBLEM 6 - Kyra
+# Note: I checked my code using GPT-4. I added the range statement to the for loop condition
 def gradient_descent_logistic(initial_a,lr,num_iterations,y,x):
-    # YOUR CODE HERE
-  ...
+     a_current = initial_a
+     for _ in range(num_iterations):
+          gradient = compute_logistic_gradient(a_current, y, x)
+          a_current = gradient_update(a_current, lr, gradient)
+     return a_current
 
-# PROBLEM 7
+# PROBLEM 7 - Kyra
 # Free Response Answer Here: 
+'''
+The function __init__ is the constructor for the TorchLogisticClassifier class. When a new
+TorchLogisticClassifier object is instantiated, this constructor is automatically called. In this
+case, in line 67 (super().__init__()). the constructor first inherits the attributes and methods
+defined in PyTorch's nn.Module class. Next, in line 68 (self.weights = nn.Parameter(torch.zeros(num_features))),
+the constructor initializes the weights attribute of the object. The weights attrubute is a tensor of size
+num_features, all of which are initialized to zero in line 68 using torch.zeros.
 
-# PROBLEM 8
-# Free Response Answer Here: 
+Line 90 (model = TorchLogisticClassifier(num_features)) implicitly calls the function __init__
+when a new TorchLogisticClassifier object named model is instantiated.
+'''
+
+# PROBLEM 8 - Kyra
+# Free Response Answer Here:
+'''
+The mathematical function computed by the forward method of TorchLogisticClassifier is the
+sigmiod function of logistic regression, which returns a probability between 0 and 1. 
+
+This function is first called on line 102 (prediction = model(d_x)) when input is first passed into
+the model. forward is implicitly called in order to compute the output prediction of model when
+given this input of d_x.
+'''
 
 # PROBLEM 9
 # Free Response Answer Here: 
