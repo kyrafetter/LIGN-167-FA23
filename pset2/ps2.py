@@ -8,7 +8,7 @@ Group Member Contributions:
 Kyra: 5, 6, 7, 8
 Lina: 1, 2, 3, 4
 Oishani: 9, 10, 11 
-Everyone: 
+Everyone: Reviewing code and debugging
 '''
 
 import numpy as np
@@ -199,7 +199,7 @@ the model. forward is implicitly called in order to compute the output predictio
 given this input of d_x.
 '''
 
-# PROBLEM 9
+# PROBLEM 9 - Oishani
 # Free Response Answer Here:
 '''
 Explaining the inner loop line-by-line:
@@ -233,7 +233,7 @@ Explaining the inner loop line-by-line:
 These are the same steps we covered for stochastic gradient descent.
 '''
 
-# PROBLEM 10
+# PROBLEM 10 - Oishani
 # Free Response Answer Here:
 '''
 optimizer.zero_grad() sets the gradients to zero so that they do not
@@ -247,7 +247,7 @@ Removing this from either of the functions would result in the gradient values
 being accumulated and causing incorrect paramter updates.
 '''
 
-# PROBLEM 11
+# PROBLEM 11 - Oishani
 # Note: I used GPT-4 to check how the innermost loop should work and to explain the 
 # code differences, given the code for non-batched gradient descent
 def batched_gradient_descent(dataset, num_epochs=10, learning_rate=0.01, batch_size=2):
