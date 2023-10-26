@@ -158,13 +158,58 @@ def gradient_descent_logistic(initial_a,lr,num_iterations,y,x):
 # Free Response Answer Here: 
 
 # PROBLEM 9
-# Free Response Answer Here: 
+# Free Response Answer Here:
+'''
+Explaining the inner loop line-by-line:
+    for d in dataset:
+    # This loops through each element d of the dataset in this epoch
+      d_x = d[0]
+      # Here, since each d is a pair (x,y), d_x gives the value of the
+      feature vector for the element d
+      d_y = d[1]
+      # Similarly, d_y gives the value of the label for the element d
+
+      optimizer.zero_grad()
+      # Explained in next problem
+
+      prediction = model(d_x)
+      # This step passes d_x through the Logistic Classifier model as defined
+      # in the model function above to get the predicted output between 0 and 1
+      loss = loss_fn(prediction, d_y)
+      # This step calculates the loss using the loss function defined above
+      # between the prediction made by the model in the preceding step and the
+      # actual d_y value from the dataset element d
+
+      loss.backward()
+      # This is the backpropagation step calculates the gradient of the loss
+      # with respect to the weights (and other parameters such as biases) using
+      # chain rule.
+      optimizer.step()
+      # This step uses the gradients and previous computations to change the model 
+      # parameters to try to reduce error.
+
+These are the same steps we covered for stochastic gradient descent.
+'''
 
 # PROBLEM 10
-# Free Response Answer Here: 
+# Free Response Answer Here:
+'''
+optimizer.zero_grad() sets the gradients to zero so that they do not
+accumulate and update the paramters with wrong gradient calculations.
+In the non-batched gradient descent, this step happens before every 
+prediction is calculated, so that the predictions are updated to the latest
+data point. In batched gradient descent, this step occurs before the 
+predictions are made for the entire batch, the loss is aggregated within the 
+batch, and then averaged over the batch size. 
+Removing this from either of the functions would result in the gradient values
+being accumulated and causing incorrect paramter updates.
+'''
 
 # PROBLEM 11
+# Note: I used GPT-4 to check how the innermost loop should work and to explain the 
+# code differences, given the code for non-batched gradient descent
 def batched_gradient_descent(dataset, num_epochs=10, learning_rate=0.01, batch_size=2):
+    # YOUR CODE HERE
     first_example = dataset[0]
     first_example_x = first_example[0]
     first_example_y = first_example[1]
@@ -190,7 +235,7 @@ def batched_gradient_descent(dataset, num_epochs=10, learning_rate=0.01, batch_s
                 sum_loss += loss 
 
             (sum_loss/batch_size).backward() 
-            optimizer.step()  # Update weights once per batch
+            optimizer.step() 
 
     return model
 	
