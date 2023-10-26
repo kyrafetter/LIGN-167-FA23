@@ -5,15 +5,15 @@ Lina Battikha, A16852105
 Oishani Bandopadhyay, A16800427
 
 Group Member Contributions:
-Kyra: 
-Lina: 
+Kyra: 5, 6, 7, 8
+Lina: 1, 2, 3, 4
 Oishani: 9, 10, 11
-Everyone: 
+Everyone: Reviewing code and debugging
 '''
 
 ################################ BEGIN GPT-3.5 RESPONSES #################################################
 
-# PROBLEM 1
+# PROBLEM 1 - Lina
 """
 ChatGPT 3.5 provided the right answer.
 Link to Conversation: https://chat.openai.com/share/90741672-a643-4266-8172-8e238b9dcb9f
@@ -34,7 +34,7 @@ def sigmoid(x):
 
 
 
-# PROBLEM 2
+# PROBLEM 2 - Lina
 """
 The solution that chatgpt3.5 provided is correct. When I asked it to write some doctests, it gave me wrong answers. 
 Link to Conversation: https://chat.openai.com/share/9651f192-c6e5-4387-a930-bc58f50482f8
@@ -52,7 +52,7 @@ def logistic_derivative_per_datapoint(y_i, x_i, a, j):
 
 
 
-# PROBLEM 3
+# PROBLEM 3 - Lina
 """
 The code that chatgpt3.5 provided for this problem was correct.
 When I asked it to write some doctests, it gave me wrong answers. 
@@ -85,7 +85,7 @@ def logistic_partial_derivative(y, x, a, j):
 
 
 
-# PROBLEM 4
+# PROBLEM 4 - Lina
 """
 ChatGPt 3.5 messed up on this problem. The function is used intially for partial 
 derivative is wrong. The partial dervivative function that it wrote was wrong. This 
@@ -174,6 +174,7 @@ def gradient_descent_logistic(initial_a, lr, num_iterations, y, x):
     return a
 
 
+
 # PROBLEM 7 - Kyra
 '''
 Link: https://chat.openai.com/share/ce1ad669-f212-4b32-bd4e-e27d9eb8bfd8
@@ -215,6 +216,7 @@ vector self.weights.
 '''
 
 
+
 # PROBLEM 8 - Kyra
 '''
 Link: https://chat.openai.com/share/cb2a9021-9e27-48d5-9a59-12001de71e03
@@ -249,7 +251,8 @@ model.
 '''
  
 
-# PROBLEM 9
+
+# PROBLEM 9 - Oishani
 '''
 Link: https://chat.openai.com/share/4f5c9744-113d-4eee-b139-59264ee620c5
 GPT-3.5 provides a correct response to this problem. It breaks down each step of the
@@ -289,7 +292,8 @@ stochastic (random) manner, leading to potentially faster convergence and better
 '''
 
 
-# PROBLEM 10
+
+# PROBLEM 10 - Oishani
 '''
 Link: https://chat.openai.com/share/4f5c9744-113d-4eee-b139-59264ee620c5
 GPT-3.5 provides a correct response to this problem, although its first 
@@ -308,7 +312,8 @@ algorithm to work incorrectly.
 '''
  
 
-# PROBLEM 11
+
+# PROBLEM 11 - Oishani
 '''
 Link: https://chat.openai.com/share/4f5c9744-113d-4eee-b139-59264ee620c5
 GPT-3.5 provides a correct response to this problem. It is a bit different
@@ -363,6 +368,3 @@ def batched_gradient_descent(dataset, num_epochs=10, learning_rate=0.01, batch_s
             optimizer.step()
 
     return model
-
-
-
