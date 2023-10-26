@@ -7,7 +7,7 @@ Oishani Bandopadhyay, A16800427
 Group Member Contributions:
 Kyra: 
 Lina: 
-Oishani: 
+Oishani: 9, 10, 11
 Everyone: 
 '''
 
