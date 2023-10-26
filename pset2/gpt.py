@@ -37,6 +37,7 @@ def sigmoid(x):
 # PROBLEM 2 - Lina
 """
 The solution that chatgpt3.5 provided is correct. When I asked it to write some doctests, it gave me wrong answers. 
+It did eventually catch its mistake after running through the algorithm manually. 
 Link to Conversation: https://chat.openai.com/share/9651f192-c6e5-4387-a930-bc58f50482f8
 """
 import numpy as np
@@ -55,7 +56,9 @@ def logistic_derivative_per_datapoint(y_i, x_i, a, j):
 # PROBLEM 3 - Lina
 """
 The code that chatgpt3.5 provided for this problem was correct.
-When I asked it to write some doctests, it gave me wrong answers. 
+When I asked it to write some doctests, it gave me wrong answers. It was able to catch 
+its mistake after running through the algorithm manually after I provided 
+the right answer. 
 Link to Conversation: https://chat.openai.com/share/a7a76bf6-4c45-4e5d-a6f8-2173ffd6b3e8 
 """
 import numpy as np
@@ -93,6 +96,7 @@ may be because I didn't provide the previous solution to it. Once I added it, I 
 provide the additional information (the previous function), it didn't compute it correctly. 
 It used a nested for-loop unnecessarily and then used the previous function which I 
 provided incorrectly. To sum this all up, it over complicated the problem. 
+Link to conversation: https://chat.openai.com/share/e5b62d71-f07a-4f15-bf67-83737dda6d30
 
 """
 import numpy as np
