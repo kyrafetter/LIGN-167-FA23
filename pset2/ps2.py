@@ -6,7 +6,7 @@ Oishani Bandopadhyay, A16800427
 
 Group Member Contributions:
 Kyra: 
-Lina: 
+Lina: 1, 2, 3, 4
 Oishani: 
 Everyone: 
 '''
@@ -126,22 +126,37 @@ def main():
 # NOTICE: DO NOT EDIT FUNCTION SIGNATURES 
 # PLEASE FILL IN FREE RESPONSE AND CODE IN THE PROVIDED SPACES
 
-
-# PROBLEM 1
+# PROBLEM 1 - Lina
 def logistic_positive_prob(x,a):
     # YOUR CODE HERE
+    # said that assuming b is 0 
+    return sigmoid(np.dot(x,a)) 
 
-# PROBLEM 2
+# PROBLEM 2 - Lina
 def logistic_derivative_per_datapoint(y_i,x_i,a,j):
     # YOUR CODE HERE
+    sigma = sigmoid(np.dot(x_i,a))
+    step_2 = (y_i - sigma) * - 1
+    x_i_j = x_i[j]
+    step_3 = step_2 * x_i_j
+    return step_3
 
-# PROBLEM 3
+# PROBLEM 3 - Lina
 def logistic_partial_derivative(y,x,a,j):
     # YOUR CODE HERE
-
-# PROBLEM 4
+    tot_sum = 0 
+    for i in range(len(y)):
+      tot_sum += logistic_derivative_per_datapoint(y[i], x[i], a, j)
+    return float(tot_sum)/len(y)
+    
+# PROBLEM 4 - Lina
 def compute_logistic_gradient(a,y,x):
     # YOUR CODE HERE
+    gradient = np.zeros(len(a))
+    for j in range(len(gradient)):
+      gradient[j] = logistic_partial_derivative(y, x, a, j) 
+    
+    return gradient
 
 # PROBLEM 5 - Kyra
 # Note: I checked my code using GPT-4, but made no updates as it was correct
@@ -193,3 +208,4 @@ given this input of d_x.
 # PROBLEM 11
 def batched_gradient_descent(dataset, num_epochs=10, learning_rate=0.01, batch_size=2):
 	# YOUR CODE HERE
+  ...
