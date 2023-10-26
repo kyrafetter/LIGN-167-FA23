@@ -276,7 +276,8 @@ def batched_gradient_descent(dataset, num_epochs=10, learning_rate=0.01, batch_s
 		    
                 sum_loss += loss 
 
-            (sum_loss/batch_size).backward() 
+            avg_loss = sum_loss / batch_size
+            avg_loss.backward() 
             optimizer.step() 
 
     return model
