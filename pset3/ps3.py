@@ -1,3 +1,16 @@
+'''
+LIGN 167 PSET 3
+Kyra Fetter, A16819058
+Lina Battikha, A16852105
+Oishani Bandopadhyay, A16800427
+
+Group Member Contributions:
+Kyra: 1, 2, 3, 4
+Lina: 9, 10, 11, 12
+Oishani: 5, 6, 7, 8 
+Everyone: Reviewing code and debugging
+'''
+
 import numpy as np
 import torch
 from torch import nn
