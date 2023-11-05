@@ -148,22 +148,23 @@ class TorchMLP(nn.Module):
 		##YOUR CODE HERE##
 
 		#first layer
-		h0 = self.first_layer
-		r0 = torch.relu(h0)
+		r0 = torch.matmul(self.first_layer, x)
+		h0 = torch.relu(r0)
+		
 
 		#second layer 
-		h1 = self.second_layer(r0)
-		r1 = torch.relu(h1)
+		r1 = torch.matmul(self.second_layer, x)
+		h1 = torch.relu(r2)
 
 		# compute final output
-		y_pred = self.layer3(r1)
+		y_pred = torch.matmul(self.third_layer, h1)
 
 		return y_pred
 
 #PROBLEM 11 - Lina
 def torch_loss(y_predicted, y_observed):
 	##YOUR CODE HERE#
-	return (y_predicted - y_observed)**2
+	return np.mean((y_predicted - y_observed)**2)
 
 
 #PROBLEM 12 - Lina
