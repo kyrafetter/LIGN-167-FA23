@@ -101,8 +101,12 @@ def d_loss_d_W2(variable_dict,y_observed):
 
 #PROBLEM 3 - Kyra
 def d_loss_d_h1(variable_dict,W2,y_observed):
-##YOUR CODE HERE##
-
+	dl_dyhred = d_loss_d_ypredicted(variable_dict,y_observed)
+	dl_dh1_0 = dl_dyhred * W2[0]
+	dl_dh1_1 = dl_dyhred * W2[1]
+	dl_dh1_2 = dl_dyhred * W2[2]
+	return np.array([dl_dh1_0, dl_dh1_1, dl_dh1_2])
+	
 
 #PROBLEM 4 - Kyra
 def relu_derivative(x):
