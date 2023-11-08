@@ -84,24 +84,32 @@ def mlp(x,W0,W1,W2):
 
 
 
-#PROBLEM 1
+#PROBLEM 1 - Kyra
 def d_loss_d_ypredicted(variable_dict,y_observed):
-##YOUR CODE HERE##
+	yphred = variable_dict['y_predicted']
+	return 2 * (yphred - y_observed)
 
 
-#PROBLEM 2
+#PROBLEM 2 - Kyra
 def d_loss_d_W2(variable_dict,y_observed):
-##YOUR CODE HERE##
+	dl_dyhred = d_loss_d_ypredicted(variable_dict,y_observed)
+	dl_dW2_0 = dl_dyhred * variable_dict['h1'][0]
+	dl_dW2_1 = dl_dyhred * variable_dict['h1'][1]
+	dl_dW2_2 = dl_dyhred * variable_dict['h1'][2]
+	return np.array([dl_dW2_0, dl_dW2_1, dl_dW2_2])
 
 
-#PROBLEM 3
+#PROBLEM 3 - Kyra
 def d_loss_d_h1(variable_dict,W2,y_observed):
 ##YOUR CODE HERE##
 
 
-#PROBLEM 4
+#PROBLEM 4 - Kyra
 def relu_derivative(x):
-##YOUR CODE HERE##
+	if x > 0:
+		return 1
+	return 0
+
 
 
 #PROBLEM 5
