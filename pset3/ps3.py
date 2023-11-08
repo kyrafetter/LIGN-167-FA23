@@ -115,7 +115,6 @@ def relu_derivative(x):
 	return 0
 
 
-
 #PROBLEM 5
 def d_loss_d_r1(variable_dict,W2,y_observed):
 ##YOUR CODE HERE##
