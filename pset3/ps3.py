@@ -14,6 +14,7 @@ Everyone: Reviewing code and debugging
 import numpy as np
 import torch
 from torch import nn
+from torch import F
 
 
 ######################################## BEGIN STARTER CODE ########################################
@@ -125,29 +126,59 @@ def d_loss_d_r0(variable_dict,W1,W2,y_observed):
 ##YOUR CODE HERE##
 
 
-#PROBLEM 9
+#PROBLEM 9 - Lina
 def d_loss_d_W0(variable_dict,W1,W2,y_observed):
 ##YOUR CODE HERE##
+	d_loss_d_ro = d_loss_d_r0(variable_dict,W1,W2,y_observed)
+	# d_loss_ro_do_wo = variable_dict["x"]
+	x = variable_dict["x"]
+	# arr = np.array([0,0,0])
 
+	answer = x * d_loss_d_ro
+	return answer.reshape(1, 3)
 
-#PROBLEM 10
+#PROBLEM 10 - Lina
 class TorchMLP(nn.Module):
 	def __init__(self):
-	    super().__init__()
-	    ##YOUR CODE HERE##
+		##YOUR CODE HERE##
+		super().__init__()
+		self.first_layer = nn.Parameter(1,3) # 1 input to 3rs
+		self.second_layer = nn.Parameter(3,3) # 3rs to 3rs
+		self.third_layer = nn.Parameter(3, 1) #3rs to output
 
 	def forward(self, x):
 		##YOUR CODE HERE##
 
+		#first layer
+		# r0 = torch.matmul(self.first_layer, x)
+		# h0 = torch.relu(r0)
+		h0 = F.relu(self.first_layer(x))
+		
 
-#PROBLEM 11
+		#second layer 
+		# r1 = torch.matmul(self.second_layer, x)
+		# h1 = torch.relu(r1)
+		h1 = F.relu(self.second_layer(h0))
+
+		# compute final output
+		# y_pred = torch.matmul(self.third_layer, h1)
+		y_pred = self.third_layer(h1)
+
+		return y_pred
+
+#PROBLEM 11 - Lina
 def torch_loss(y_predicted, y_observed):
-	##YOUR CODE HERE##
+	##YOUR CODE HERE#
+	return np.mean((y_predicted - y_observed)**2)
 
 
-#PROBLEM 12
+#PROBLEM 12 - Lina
 def torch_compute_gradient(x,y_observed,model):
 	##YOUR CODE HERE##
+	model.train() # need to train the model
+	model.zero_grad() # zero out the gradients from the previous steps
+	y_pred = model(x) # compute the forward pass
+	loss = nn.MSELoss() # check the loss using MSE function
+	loss_val = loss(y_pred, y_observed) # use the loss function to get a value
+	loss_val.backward() # performs the backward pass
 	return model
-
-
