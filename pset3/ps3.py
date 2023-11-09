@@ -146,7 +146,7 @@ def d_loss_d_W0(variable_dict,W1,W2,y_observed):
 	# arr = np.array([0,0,0])
 
 	answer = x * d_loss_d_ro
-	return answer.reshape(1, 3)
+	return answer
 
 #PROBLEM 10 - Lina
 class TorchMLP(nn.Module):
@@ -159,12 +159,10 @@ class TorchMLP(nn.Module):
 
 	def forward(self, x):
 		##YOUR CODE HERE##
-
 		#first layer
 		# r0 = torch.matmul(self.first_layer, x)
 		# h0 = torch.relu(r0)
 		h0 = F.relu(self.first_layer(x))
-		
 
 		#second layer 
 		# r1 = torch.matmul(self.second_layer, x)
@@ -180,16 +178,14 @@ class TorchMLP(nn.Module):
 #PROBLEM 11 - Lina
 def torch_loss(y_predicted, y_observed):
 	##YOUR CODE HERE#
-	return np.mean((y_predicted - y_observed)**2)
-
+	return (y_predicted - y_observed)**2
 
 #PROBLEM 12 - Lina
 def torch_compute_gradient(x,y_observed,model):
 	##YOUR CODE HERE##
-	model.train() # need to train the model
+	# model.train() # need to train the model
 	model.zero_grad() # zero out the gradients from the previous steps
-	y_pred = model(x) # compute the forward pass
-	loss = nn.MSELoss() # check the loss using MSE function
-	loss_val = loss(y_pred, y_observed) # use the loss function to get a value
+	y_pred = model.forward(x) # compute the forward pass
+	loss_val = torch_loss(y_pred, y_observed) # use the loss function to get a value
 	loss_val.backward() # performs the backward pass
 	return model

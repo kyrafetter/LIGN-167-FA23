@@ -156,7 +156,8 @@ Link to convesation: https://chat.openai.com/share/2dc6cd26-9de4-4673-899b-abdd5
 The code that was provided here was unnecessary. It did x.unsqueeze(-1) although 
 we already know that x is an scalar value. Also, it unecessary to return y_pred.squeeze(-1). It was trying to make sure that 
 was edge wasn't going to happend, but instead made the problem more complicated and 
-unnecessary amount of additional code. 
+unnecessary amount of additional code. Also, it added some additional work 
+that was not asked of it - it wrote a loss function for this class. 
 
 """
 import torch
@@ -232,7 +233,8 @@ def torch_loss(y_predicted, y_observed):
 """
 Link to conversation: https://chat.openai.com/share/1bcf0c46-5b7d-4c6a-a105-3896c985af34
 The code addressed an edge case that was already specified in the problem statement. 
-Otherwise, everything else is correct. 
+Otherwise, everything else is correct. It made the same errors in using built in functions 
+with model.train() and loss as solution1, instead of using functions that we've provided. 
 """
 import torch
 
@@ -242,7 +244,7 @@ def torch_compute_gradient(x, y_observed, model):
     
     # Zero the gradients
     model.zero_grad()
-    
+
     # Add an extra dimension to x and y_observed if necessary (assuming they are 1-dimensional)
     if x.ndim == 1:
         x = x.unsqueeze(0)  # Converts from [1] to [1, 1]
