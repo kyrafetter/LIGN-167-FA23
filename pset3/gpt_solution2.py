@@ -126,7 +126,7 @@ print(model.W0.grad, model.W1.grad, model.W2.grad)
 """
 Link to conversation: https://chat.openai.com/share/152aa8e0-b825-4a7d-a528-ea54a422aabb
 The code added some additional edge cases, though it was already specified in the
-problem what was being passed in. 
+problem what was being passed in. Otherwise, it is correct. 
 """
 import torch
 

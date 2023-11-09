@@ -31,8 +31,10 @@ Everyone: Reviewing code and debugging
 """
 Link to conversation: https://chat.openai.com/share/a7f99cd5-82fe-466b-8be1-c23772249d75
 Although I provided the functions that it can use, rewrote some of the functions 
-unnecessarily. It also needs to return an array of shape 3, but instead doesn't ensure that 
-it does this. 
+unnecessarily. It didn't correctly access "ypredicted" from the dictionary, instead 
+used "ypred". Also, it grabbed h0, but never used it. Also, the line that uses np.dot 
+is not necessarily incorrect, however, it would have better if it broke down the 
+results so not everythign was to be stored together. d_r1_d_h0 need to be transposed. 
 """
 import numpy as np
 

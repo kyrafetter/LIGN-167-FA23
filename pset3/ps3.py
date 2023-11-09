@@ -14,6 +14,7 @@ Everyone: Reviewing code and debugging
 import numpy as np
 import torch
 from torch import nn
+from torch import F
 
 
 ######################################## BEGIN STARTER CODE ########################################
@@ -129,11 +130,12 @@ def d_loss_d_r0(variable_dict,W1,W2,y_observed):
 def d_loss_d_W0(variable_dict,W1,W2,y_observed):
 ##YOUR CODE HERE##
 	d_loss_d_ro = d_loss_d_r0(variable_dict,W1,W2,y_observed)
-	d_loss_ro_do_wo = variable_dict["x"]
-	arr = np.array([0,0,0])
+	# d_loss_ro_do_wo = variable_dict["x"]
+	x = variable_dict["x"]
+	# arr = np.array([0,0,0])
 
-	answer = d_loss_d_ro * arr
-	return answer
+	answer = x * d_loss_d_ro
+	return answer.reshape(1, 3)
 
 #PROBLEM 10 - Lina
 class TorchMLP(nn.Module):
@@ -148,16 +150,19 @@ class TorchMLP(nn.Module):
 		##YOUR CODE HERE##
 
 		#first layer
-		r0 = torch.matmul(self.first_layer, x)
-		h0 = torch.relu(r0)
+		# r0 = torch.matmul(self.first_layer, x)
+		# h0 = torch.relu(r0)
+		h0 = F.relu(self.first_layer(x))
 		
 
 		#second layer 
-		r1 = torch.matmul(self.second_layer, x)
-		h1 = torch.relu(r2)
+		# r1 = torch.matmul(self.second_layer, x)
+		# h1 = torch.relu(r1)
+		h1 = F.relu(self.second_layer(h0))
 
 		# compute final output
-		y_pred = torch.matmul(self.third_layer, h1)
+		# y_pred = torch.matmul(self.third_layer, h1)
+		y_pred = self.third_layer(h1)
 
 		return y_pred
 
