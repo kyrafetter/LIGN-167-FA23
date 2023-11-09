@@ -172,7 +172,8 @@ def d_loss_d_W0(variable_dict, W1, W2, y_observed):
 # Problem 10
 """
 Link to conversation: https://chat.openai.com/share/2dc6cd26-9de4-4673-899b-abdd5763b85b
-The code that was provided here is correct. 
+The code that was provided here is mostly correct. It look the library 
+of writing a lost function for this class, which was uncessary. 
 """
 import torch
 import torch.nn as nn
@@ -238,7 +239,10 @@ def torch_loss(y_predicted, y_observed):
 # Problem 12
 """
 Link to conversation: https://chat.openai.com/share/1bcf0c46-5b7d-4c6a-a105-3896c985af34
-The code that was provided is correct. 
+The code that was provided is correct. Though model(x) is not wrong in an overall sense, 
+it overlooked that we did have a function that we could use in the the torchMLP class to 
+compute by doing model.forward(x). It also, did the same thing as with loss - instead of using
+the functions that we already provided, it using functions directly from the PyTorch library. 
 """
 import torch
 
