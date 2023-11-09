@@ -86,25 +86,25 @@ def mlp(x,W0,W1,W2):
 
 #PROBLEM 1 - Kyra
 def d_loss_d_ypredicted(variable_dict,y_observed):
-	yphred = variable_dict['y_predicted']
-	return 2 * (yphred - y_observed)
+	ypred = variable_dict['y_predicted']
+	return 2 * (ypred - y_observed)
 
 
 #PROBLEM 2 - Kyra
 def d_loss_d_W2(variable_dict,y_observed):
-	dl_dyhred = d_loss_d_ypredicted(variable_dict,y_observed)
-	dl_dW2_0 = dl_dyhred * variable_dict['h1'][0]
-	dl_dW2_1 = dl_dyhred * variable_dict['h1'][1]
-	dl_dW2_2 = dl_dyhred * variable_dict['h1'][2]
+	dl_dypred = d_loss_d_ypredicted(variable_dict,y_observed)
+	dl_dW2_0 = dl_dypred * variable_dict['h1'][0]
+	dl_dW2_1 = dl_dypred * variable_dict['h1'][1]
+	dl_dW2_2 = dl_dypred * variable_dict['h1'][2]
 	return np.array([dl_dW2_0, dl_dW2_1, dl_dW2_2])
 
 
 #PROBLEM 3 - Kyra
 def d_loss_d_h1(variable_dict,W2,y_observed):
-	dl_dyhred = d_loss_d_ypredicted(variable_dict,y_observed)
-	dl_dh1_0 = dl_dyhred * W2[0]
-	dl_dh1_1 = dl_dyhred * W2[1]
-	dl_dh1_2 = dl_dyhred * W2[2]
+	dl_dypred = d_loss_d_ypredicted(variable_dict,y_observed)
+	dl_dh1_0 = dl_dypred * W2[0]
+	dl_dh1_1 = dl_dypred * W2[1]
+	dl_dh1_2 = dl_dypred * W2[2]
 	return np.array([dl_dh1_0, dl_dh1_1, dl_dh1_2])
 	
 
