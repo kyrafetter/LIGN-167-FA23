@@ -142,9 +142,9 @@ class TorchMLP(nn.Module):
 	def __init__(self):
 		##YOUR CODE HERE##
 		super().__init__()
-		self.first_layer = nn.Linear(1,3) # 1 input to 3rs
-		self.second_layer = nn.Linear(3,3) # 3rs to 3rs
-		self.third_layer = nn.Linear(3, 1) #3rs to output
+		self.first_layer = nn.Parameter(1,3) # 1 input to 3rs
+		self.second_layer = nn.Parameter(3,3) # 3rs to 3rs
+		self.third_layer = nn.Parameter(3, 1) #3rs to output
 
 	def forward(self, x):
 		##YOUR CODE HERE##

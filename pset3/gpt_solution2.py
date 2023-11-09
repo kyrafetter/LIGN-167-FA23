@@ -68,7 +68,7 @@ def d_loss_d_W0(variable_dict, W1, W2, y_observed):
 """
 Link to convesation: https://chat.openai.com/share/2dc6cd26-9de4-4673-899b-abdd5763b85b
 The code that was provided here was unnecessary. It did x.unsqueeze(-1) although 
-we already know that x is an scalar value. It was trying to make sure that 
+we already know that x is an scalar value. Also, it unecessary to return y_pred.squeeze(-1). It was trying to make sure that 
 was edge wasn't going to happend, but instead made the problem more complicated and 
 unnecessary amount of additional code. 
 
