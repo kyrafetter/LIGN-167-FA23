@@ -105,13 +105,152 @@ derivatives_corrected
 RESULT
 [1, 0, 0]
 
+
 # Problem 5
+'''
+Link: https://chat.openai.com/share/91972084-badd-4d33-9f35-8dc58e19e0ed
+GPT-4 provides a similar response that's slightly different
+than my implementation, but accurate.
+'''
+import numpy as np
+
+def relu_derivative(x):
+    return np.where(x > 0, 1, 0)
+
+def d_loss_d_r1(variable_dict, W2, y_observed):
+    # Extract necessary variables from the dictionary
+    r1 = variable_dict['r1']
+    y_predicted = variable_dict['y_predicted']
+
+    # Compute the derivative of the loss w.r.t. y_predicted
+    d_loss_dy_predicted = 2 * (y_predicted - y_observed)
+
+    # Propagate this through W2 to get the gradient w.r.t. h1
+    d_loss_dh1 = d_loss_dy_predicted * W2
+
+    # Compute the derivative of the ReLU function w.r.t. r1
+    relu_grad_r1 = relu_derivative(r1)
+
+    # Apply chain rule to get the gradient w.r.t. r1
+    d_loss_dr1 = d_loss_dh1 * relu_grad_r1
+
+    return d_loss_dr1
+
 
 # Problem 6
+'''
+Link: https://chat.openai.com/share/91972084-badd-4d33-9f35-8dc58e19e0ed
+GPT-4 provides a similar response that's slightly different
+than my implementation, with some added definitions
+and calculations that may not be necessary.
+'''
+import numpy as np
+
+def d_loss_d_W1(variable_dict, W2, y_observed):
+    # Extract necessary variables from the dictionary
+    h0 = variable_dict['h0']
+    r1 = variable_dict['r1']
+    y_predicted = variable_dict['y_predicted']
+
+    # Compute the derivative of the loss w.r.t. y_predicted
+    d_loss_dy_predicted = 2 * (y_predicted - y_observed)
+
+    # Propagate this through W2 to get the gradient w.r.t. h1
+    d_loss_dh1 = d_loss_dy_predicted * W2
+
+    # Compute the derivative of the ReLU function w.r.t. r1
+    relu_grad_r1 = relu_derivative(r1)
+
+    # Apply chain rule to get the gradient w.r.t. r1
+    d_loss_dr1 = d_loss_dh1 * relu_grad_r1
+
+    # Compute the gradient w.r.t. W1
+    # Using np.outer or einsum to compute the outer product between d_loss_dr1 and h0
+    d_loss_d_W1 = np.zeros((3, 3))
+    for i in range(3):
+        d_loss_d_W1[i] = np.outer(d_loss_dr1, h0[i])
+
+    return d_loss_d_W1
+
+def relu_derivative(x):
+    return np.where(x > 0, 1, 0)
+
 
 # Problem 7
+'''
+Link: https://chat.openai.com/share/91972084-badd-4d33-9f35-8dc58e19e0ed
+GPT-4 provides a similar response that's slightly different
+than my implementation, with some added definitions
+and calculations that may not be necessary.
+'''
+import numpy as np
+
+def d_loss_d_h0(variable_dict, W1, W2, y_observed):
+    # Extract necessary variables from the dictionary
+    h0 = variable_dict['h0']
+    r1 = variable_dict['r1']
+    y_predicted = variable_dict['y_predicted']
+
+    # Compute the derivative of the loss w.r.t. y_predicted
+    d_loss_dy_predicted = 2 * (y_predicted - y_observed)
+
+    # Propagate this through W2 to get the gradient w.r.t. h1
+    d_loss_dh1 = d_loss_dy_predicted * W2
+
+    # Compute the derivative of the ReLU function w.r.t. r1
+    relu_grad_r1 = relu_derivative(r1)
+
+    # Apply chain rule to get the gradient w.r.t. r1
+    d_loss_dr1 = d_loss_dh1 * relu_grad_r1
+
+    # Propagate the gradient back through W1 to get the gradient w.r.t. h0
+    # Multiply the gradient w.r.t r1 with the transpose of W1
+    d_loss_d_h0 = np.dot(W1.T, d_loss_dr1)
+
+    return d_loss_d_h0
+
+def relu_derivative(x):
+    return np.where(x > 0, 1, 0)
+
 
 # Problem 8
+'''
+Link: https://chat.openai.com/share/91972084-badd-4d33-9f35-8dc58e19e0ed
+GPT-4 provides a similar response that's slightly different
+than my implementation, but accurate.
+'''
+import numpy as np
+
+def d_loss_d_r0(variable_dict, W1, W2, y_observed):
+    # Extract necessary variables from the dictionary
+    r0 = variable_dict['r0']
+    r1 = variable_dict['r1']
+    y_predicted = variable_dict['y_predicted']
+
+    # Compute the derivative of the loss w.r.t. y_predicted
+    d_loss_dy_predicted = 2 * (y_predicted - y_observed)
+
+    # Propagate this through W2 to get the gradient w.r.t. h1
+    d_loss_dh1 = d_loss_dy_predicted * W2
+
+    # Compute the derivative of the ReLU function w.r.t. r1
+    relu_grad_r1 = relu_derivative(r1)
+
+    # Apply chain rule to get the gradient w.r.t. r1
+    d_loss_dr1 = d_loss_dh1 * relu_grad_r1
+
+    # Propagate the gradient back through W1 to get the gradient w.r.t. h0
+    d_loss_d_h0 = np.dot(W1.T, d_loss_dr1)
+
+    # Apply the derivative of the ReLU function to the gradient w.r.t. r0
+    relu_grad_r0 = relu_derivative(r0)
+    d_loss_dr0 = d_loss_d_h0 * relu_grad_r0
+
+    return d_loss_dr0
+
+def relu_derivative(x):
+    return np.where(x > 0, 1, 0)
+
 
 # Problem 9
 """
