@@ -118,23 +118,43 @@ def relu_derivative(x):
 
 #PROBLEM 5
 def d_loss_d_r1(variable_dict,W2,y_observed):
-##YOUR CODE HERE##
-
+	d1_dh1 = d_loss_d_h1(variable_dict, W2, y_observed)
+	r1 = variable.dict['r1']
+	relu_grads = np.array([relu_derivative(r1_j) for r1_j in r1])
+	dl_dr1 = d1_dh1*relu_grads
+	return dl_dr1
 
 #PROBLEM 6
 def d_loss_d_W1(variable_dict,W2,y_observed):
-##YOUR CODE HERE##
+    # Calculate the gradient of the loss with respect to r1
+    dl_dr1 = d_loss_d_r1(variable_dict, W2, y_observed)
+    
+    # Retrieve the activation of h0 from variable_dict
+    h0 = variable_dict['h0']
+    
+    # Use einsum to calculate the outer product for each row in dl_dr1 and h0
+    # This effectively calculates the gradient for each weight in W1
+    dl_dW1 = np.einsum('i,j->ij', dl_dr1, h0)
+    
+    return dl_dW1
 
 
 #PROBLEM 7
 def d_loss_d_h0(variable_dict,W1,W2,y_observed):
-##YOUR CODE HERE##
-
+	dl_dr1 = d_loss_d_r1(variable_dict, W2, y_observed)
+	relu_grads_r1 = np.array([relu_derivative(ri) for ri in variable_dict['r1']])
+	dl_dh1 = dl_dr1 * relu_grads_r1
+	dl_dh0 = np.dot(W1.T, dl_dh1)
+	return dl_dh0
 
 
 #PROBLEM 8
 def d_loss_d_r0(variable_dict,W1,W2,y_observed):
-##YOUR CODE HERE##
+	d1_dh0 = d_loss_d_h0(variable_dict, W2, y_observed)
+	r0 = variable.dict['r0']
+	relu_grads = np.array([relu_derivative(r0_j) for r0_j in r0])
+	dl_dr0 = d1_dh0*relu_grads
+	return dl_dr0
 
 
 #PROBLEM 9 - Lina
@@ -180,4 +200,3 @@ def torch_compute_gradient(x,y_observed,model):
 	loss_val.backward() # performs the backward pass
 	return model
 
-# remember to transform input into tensors 
