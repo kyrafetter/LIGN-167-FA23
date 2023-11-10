@@ -14,8 +14,6 @@ Everyone: Reviewing code and debugging
 import numpy as np
 import torch
 from torch import nn
-from torch import F
-
 
 ######################################## BEGIN STARTER CODE ########################################
 
