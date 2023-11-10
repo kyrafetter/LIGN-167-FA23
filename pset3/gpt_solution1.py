@@ -121,12 +121,143 @@ RESULT
 (1, 0, 0)
 
 # Problem 5
+'''
+Link: https://chat.openai.com/share/fd7fb291-c56c-4f66-8bfb-6988cb018839
+GPT-4 provides an accurate response that is somewhat different than
+my implementation, but the results should work the same.
+'''
+import numpy as np
+
+def d_loss_d_r1(variable_dict, W2, y_observed):
+    r1 = variable_dict['r1']  # Extract r1 from the variable dictionary
+    h1 = np.maximum(r1, 0)    # Apply ReLU to r1 to get h1
+
+    # Assuming the output is a linear combination of h1 with weights W2
+    y_predicted = np.dot(h1, W2)
+
+    # Derivative of loss with respect to y_predicted
+    d_loss_dy_predicted = 2 * (y_predicted - y_observed)
+
+    derivatives = np.zeros(3)  # Initialize an array to hold the derivatives
+
+    for j in range(3):
+        # Assuming the network structure, y_predicted depends linearly on h1
+        d_y_predicted_d_h1j = W2[j]
+
+        # Apply the chain rule
+        derivatives[j] = d_loss_dy_predicted * d_y_predicted_d_h1j * relu_derivative(r1[j])
+
+    return derivatives
+
 
 # Problem 6
+'''
+Link: https://chat.openai.com/share/fd7fb291-c56c-4f66-8bfb-6988cb018839
+GPT-4 provides an accurate response that is somewhat different than
+my implementation, but the results should work the same.
+'''
+import numpy as np
+
+def d_loss_d_W1(variable_dict, W2, y_observed):
+    x = variable_dict['x']  # Input to the network
+    r1 = np.dot(x, variable_dict['W1'])  # First layer output before ReLU
+    h1 = np.maximum(r1, 0)  # ReLU activation
+    y_predicted = np.dot(h1, W2)  # Final output
+
+    # Derivative of loss with respect to y_predicted
+    d_loss_dy_predicted = 2 * (y_predicted - y_observed)
+
+    # Derivative of y_predicted w.r.t h1 (assuming linear relation)
+    d_y_predicted_d_h1 = W2
+
+    # Initialize the matrix for storing derivatives
+    d_loss_d_W1 = np.zeros((3, 3))
+
+    for i in range(3):
+        for j in range(3):
+            # Chain rule application
+            # Derivative of h1 w.r.t W1[i, j] is x[j] if r1[i] > 0, else 0
+            d_h1i_d_W1ij = x[j] if r1[i] > 0 else 0
+
+            # Accumulate the derivative for this weight
+            d_loss_d_W1[i, j] = d_loss_dy_predicted * d_y_predicted_d_h1[i] * d_h1i_d_W1ij
+
+    return d_loss_d_W1
+
 
 # Problem 7
+'''
+Link: https://chat.openai.com/share/fd7fb291-c56c-4f66-8bfb-6988cb018839
+GPT-4 provides an accurate response that is somewhat different than
+my implementation, but the results should work the same.
+'''
+def d_loss_d_h0(variable_dict, W1, W2, y_observed):
+    h0 = variable_dict['h0']  # Input to the first layer
+    r1 = np.dot(h0, W1)       # Output of the first layer before ReLU
+    h1 = np.maximum(r1, 0)    # ReLU activation to get the second layer's input
+    y_predicted = np.dot(h1, W2)  # Final output prediction
+
+    # Derivative of loss with respect to y_predicted
+    d_loss_dy_predicted = 2 * (y_predicted - y_observed)
+
+    # Initialize array for storing derivatives
+    d_loss_d_h0 = np.zeros(3)
+
+    for i in range(3):
+        # Derivative of y_predicted w.r.t h1 (assuming linear relation with W2)
+        d_y_predicted_d_h1 = W2
+
+        # Initialize derivative accumulator for this element of h0
+        d_loss_d_h0i = 0
+
+        for j in range(3):
+            # Derivative of h1 w.r.t r1 (ReLU derivative)
+            d_h1j_d_r1j = 1 if r1[j] > 0 else 0
+
+            # Derivative of r1 w.r.t h0 (linear relation with W1)
+            d_r1j_d_h0i = W1[j, i]
+
+            # Apply the chain rule
+            d_loss_d_h0i += d_loss_dy_predicted * d_y_predicted_d_h1[j] * d_h1j_d_r1j * d_r1j_d_h0i
+
+        d_loss_d_h0[i] = d_loss_d_h0i
+
+    return d_loss_d_h0
+
 
 # Problem 8
+'''
+Link: https://chat.openai.com/share/fd7fb291-c56c-4f66-8bfb-6988cb018839
+GPT-4 provides an accurate response that is somewhat different than
+my implementation, that I tried to get it to optimize more.
+'''
+def d_loss_d_r0(variable_dict, W1, W2, y_observed):
+    r0 = variable_dict['r0']  # Input to the activation function
+    h0 = np.maximum(r0, 0)    # Activation function (ReLU)
+    r1 = np.dot(h0, W1)       # Output of the first layer before ReLU
+    h1 = np.maximum(r1, 0)    # Second layer's input after ReLU
+    y_predicted = np.dot(h1, W2)  # Final output
+
+    # Derivative of loss with respect to y_predicted
+    d_loss_dy_predicted = 2 * (y_predicted - y_observed)
+
+    # Derivative of y_predicted w.r.t h1 (linear relation with W2)
+    d_y_predicted_d_h1 = W2
+
+    # Derivative of h1 w.r.t r1 (ReLU derivative)
+    d_h1_d_r1 = np.where(r1 > 0, 1, 0)
+
+    # Derivative of r1 w.r.t h0 (linear relation with W1)
+    d_r1_d_h0 = W1
+
+    # Derivative of h0 w.r.t r0 (ReLU derivative)
+    d_h0_d_r0 = np.where(r0 > 0, 1, 0)
+
+    # Apply the chain rule
+    d_loss_d_r0 = d_loss_dy_predicted * (d_y_predicted_d_h1 @ d_h1_d_r1 @ d_r1_d_h0) * d_h0_d_r0
+
+    return d_loss_d_r0
+
 
 # Problem 9
 """
