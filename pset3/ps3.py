@@ -119,7 +119,7 @@ def relu_derivative(x):
 #PROBLEM 5
 def d_loss_d_r1(variable_dict,W2,y_observed):
 	d1_dh1 = d_loss_d_h1(variable_dict, W2, y_observed)
-	r1 = variable.dict['r1']
+	r1 = variable_dict['r1']
 	relu_grads = np.array([relu_derivative(r1_j) for r1_j in r1])
 	dl_dr1 = d1_dh1*relu_grads
 	return dl_dr1
@@ -150,8 +150,8 @@ def d_loss_d_h0(variable_dict,W1,W2,y_observed):
 
 #PROBLEM 8
 def d_loss_d_r0(variable_dict,W1,W2,y_observed):
-	d1_dh0 = d_loss_d_h0(variable_dict, W2, y_observed)
-	r0 = variable.dict['r0']
+	d1_dh0 = d_loss_d_h0(variable_dict,W1,W2, y_observed)
+	r0 = variable_dict['r0']
 	relu_grads = np.array([relu_derivative(r0_j) for r0_j in r0])
 	dl_dr0 = d1_dh0*relu_grads
 	return dl_dr0
