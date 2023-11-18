@@ -198,3 +198,42 @@ def torch_compute_gradient(x,y_observed,model):
 	loss_val.backward() # performs the backward pass
 	return model
 
+
+
+# Assume your manual implementation and TorchMLP model are defined as provided above
+# Set a fixed random seed for reproducibility
+np.random.seed(2)
+torch.manual_seed(2)
+
+# Initialize weights with the same values for both implementations
+W0 = np.random.rand(3)
+W1 = np.random.rand(3, 3)
+W2 = np.random.rand(3)
+
+# Convert numpy arrays to torch tensors
+W0_torch = torch.tensor(W0, dtype=torch.float32, requires_grad=True)
+W1_torch = torch.tensor(W1, dtype=torch.float32, requires_grad=True)
+W2_torch = torch.tensor(W2, dtype=torch.float32, requires_grad=True)
+
+# Initialize the model and set the weights
+model = TorchMLP()
+model.first_layer.data = W0_torch.view(3, 1)
+model.second_layer.data = W1_torch
+model.third_layer.data = W2_torch.view(1, 3)
+
+# Input and observed output
+x = 10
+y_observed = 5
+x_torch = torch.tensor([x], dtype=torch.float32)
+
+# Compute gradients using manual implementation
+variable_dict = mlp(x, W0, W1, W2)
+grads_manual = d_loss_d_W0(variable_dict, W1, W2, y_observed)
+
+# Compute gradients using PyTorch
+model = torch_compute_gradient(x_torch, torch.tensor([y_observed], dtype=torch.float32), model)
+grads_torch = model.first_layer.grad
+
+# Compare the results
+print("Manual gradients:", grads_manual)
+print("PyTorch gradients:", grads_torch)
