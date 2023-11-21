@@ -51,7 +51,22 @@ elsewhere as fewer and fewer high-error predictions were made.
 
 
 # Problem 10 - Kyra
+'''
+As given: 7.316 -> 5.019
+LR = 0.005: 6.7 -> 4.9051
+LR = 0.1: 5.3 -> 4.783
+LR = 1: 5.7 -> 2.858757557
 
+LR = 1, emdim/hsdim = 100: nan
+LR = 1, emdim/hsdim = 10: 5.0685 -> 3.18
+LR = 0.1, emdim/hsdim = 64: 5.382 -> 5.0137
+LR = 0.8, emdim/hsdim = 64: fluctuate around 12.6
+LR = 0.1, emdim/hsdim = 100: 5.51841 -> 5.1242
+LR = 0.1, emdim/hsdim = 2: 5.7816 -> 4.3425
+
+LR = 1, 500 epochs: 5.7 -> 2.7-2.8 after <500 epochs
+
+'''
 
 # Problem 11 - Kyra
 '''
