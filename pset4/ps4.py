@@ -54,5 +54,13 @@ elsewhere as fewer and fewer high-error predictions were made.
 
 
 # Problem 11 - Kyra
-
-
+'''
+The Elman network would not be able to model this dependency completely, if at all.
+This is because the interpretation of the 950th word is determined solely from that
+of the 949th word, which is representative of itself and all words before it. By this
+point, we have calculated many many gradients such that we see the exploding/vanishing
+gradient problem, where the effect of words at the beginning of the sentence (for
+ex. the 3rd word) disappear and are lost due to the many multiplications of what may
+become very large or very small values. We also may run into the issue of the 
+accumuation of noise, especially if the training text used is long. 
+'''

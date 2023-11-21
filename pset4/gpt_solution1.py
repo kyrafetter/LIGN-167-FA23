@@ -73,5 +73,43 @@ natural language processing applications.
 
 
 # Problem 11 - Kyra
+'''
+Link: https://chat.openai.com/share/09f4bea1-e8e8-4300-97bc-9f1655889ecb
+GPT-4's response is correct and complete.
 
+Elman networks, also known as simple recurrent neural networks (SRNNs), have a form 
+of memory through their recurrent connections, which in theory allows them to maintain 
+information about previous inputs for some period of time. However, in practice, SRNNs
+like the Elman network are notorious for their difficulty in learning long-range
+dependencies, particularly when the dependency spans many time steps, as in the 
+scenario described in Problem 11.
 
+The ability of an Elman network to model the dependency of the 950th word on the 
+3rd word in a text would face several challenges:
+
+Vanishing Gradient Problem: As gradients are back-propagated through time and across
+many layers of computation, they tend to get smaller, eventually becoming insignificantly 
+tiny. This makes it hard for the network to learn correlations between distant events 
+because the information about the correlation does not effectively flow back to where 
+the correlation needs to be learned.
+
+Limited Memory Capacity: The hidden state of an Elman network has to capture all the 
+relevant information from the past to predict the next word. If the text is very long, 
+it's unlikely that the network will retain specific information about the 3rd word 
+until the 950th word without significant loss of detail.
+
+Noise Accumulation: As the network processes a sequence of words, noise can accumulate 
+in the hidden state, further obscuring any signal from early words in the text.
+
+Solutions to the problem of learning long-range dependencies in sequences include 
+more sophisticated types of RNNs such as Long Short-Term Memory (LSTM) networks 
+or Gated Recurrent Units (GRUs), which are specifically designed to mitigate the 
+vanishing gradient problem and better capture long-range dependencies. They do 
+this by having a more complex internal structure that can maintain a memory over 
+longer sequences than simple RNNs like the Elman network.
+
+In the specific context of an Elman network, the design and tuning of the network, 
+such as the size of the hidden layer and the specific task it is trained on, can 
+somewhat influence its ability to capture long-range dependencies, but there are 
+inherent limitations due to the network's architecture.
+'''

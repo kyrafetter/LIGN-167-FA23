@@ -68,4 +68,41 @@ improving its performance on the training data.
 
 
 # Problem 11 - Kyra
+'''
+Link: https://chat.openai.com/share/09f4bea1-e8e8-4300-97bc-9f1655889ecb
+GPT-4 provided essentially the same response, but included mention of the Exploding
+Gradient Problem, which it did not explicity identify in it's first response. However,
+this is a valid problem, and therefore GPT-4's response remains correct.
 
+Apologies for the confusion earlier. Let's reevaluate the situation described 
+in Problem 11.
+
+Elman networks are a type of recurrent neural network that can theoretically 
+maintain information from previous time steps through hidden states. However, 
+they are limited in their capacity to handle long-range dependencies, especially 
+over thousands of words as mentioned in the scenario.
+
+Here are the primary challenges they would face:
+
+Vanishing Gradient Problem: In long sequences, as the gradient of the loss is 
+propagated backward through each timestep, it can shrink exponentially, becoming 
+vanishingly small. This makes it difficult for the network to learn dependencies 
+between distant positions in the sequence.
+
+Limited Capacity of Hidden States: The hidden state in an Elman network carries 
+information from one timestep to the next. As the sequence progresses, earlier 
+information tends to be overwritten by more recent information. There's a limit 
+to how much information the hidden state can carry, and over a long sequence like 
+1000 words, it's unlikely that the information from the 3rd word would be preserved 
+all the way to the 950th word.
+
+Exploding Gradient Problem: Conversely to vanishing gradients, gradients can also 
+grow exponentially during backpropagation, which can lead to very large updates to 
+the model weights and cause the model to diverge.
+
+Given these issues, an Elman network might struggle to capture the dependency of 
+the 950th word on the 3rd word in a text. Advanced architectures like LSTMs or 
+GRUs are better suited for this task as they have mechanisms to remember and 
+forget information selectively over long sequences, helping to preserve relevant 
+information and mitigate the vanishing gradient problem.
+'''
