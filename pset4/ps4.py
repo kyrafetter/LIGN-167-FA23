@@ -36,6 +36,18 @@ Everyone: Reviewing code and debugging
 
 
 # Problem 9 - Kyra
+'''
+When the code is run by calling train, the loss decreases over time, indicating an
+increase in log-liklihood. The loss initially was approximately 7.316, but then
+exponentially decreased until it finally converged at 5.019617 after 100 epochs.
+Generally speaking, because the loss decreased over training, we know that the
+probability associated with the next word prediction was increasing overtime.
+The loss initially decreased with greater steps, demonstrating that predictions
+with high-error were made towards the beginning of training; however, as the
+magnitude of the change in loss decreased throughout training, we see that the model's 
+probability distribution around correct words became increasingly sharper and flatter
+elsewhere as fewer and fewer high-error predictions were made.
+'''
 
 
 # Problem 10 - Kyra
